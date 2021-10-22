@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', function(){
+Route::get('/index', function () {
     return view('layouts.app');
 });
 
-Route::get('/example', function(){
+Route::get('/example', function () {
     return view('example');
 });
 
