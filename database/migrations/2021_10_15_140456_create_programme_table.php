@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
-class CreatePaeTable extends Migration
+class CreateProgrammeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +14,7 @@ class CreatePaeTable extends Migration
      */
     public function up()
     {
-        Schema::create('pae', function (Blueprint $table) {
+        Schema::create('programme', function (Blueprint $table) {
             $table->integer('student');
             $table->foreign('student')->on('student')->references('matricule');
 
@@ -21,9 +22,10 @@ class CreatePaeTable extends Migration
             $table->foreign('course')->on('course')->references('title');
 
             $table->boolean('is_validated')->default(false);
-
+            $table->integer('cote');
             $table->primary(array('student', 'course'));
         });
+        DB::statement('ALTER TABLE programme ADD CONSTRAINT chk_cote_number CHECK (cote >= 0);');
     }
 
     /**
@@ -33,6 +35,6 @@ class CreatePaeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pae');
+        Schema::dropIfExists('cote');
     }
 }

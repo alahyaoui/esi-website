@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    protected $table = 'course';
+    public $timestamps = false;
+    protected $primaryKey = 'title';
+    public $incrementing = false;
+
     use HasFactory;
 }
-

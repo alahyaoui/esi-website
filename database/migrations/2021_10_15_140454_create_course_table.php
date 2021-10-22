@@ -18,10 +18,12 @@ class CreateCourseTable extends Migration
             $table->string('title')->primary();
             $table->string('description');
             $table->integer('quadri');
+            $table->integer('credits');
             $table->integer('bloc');
             $table->foreign('bloc')->on('bloc')->references('bloc');
         });
         DB::statement('ALTER TABLE course ADD CONSTRAINT chk_quadri_number CHECK (quadri IN (1,2,3,4,5,6));');
+        DB::statement('ALTER TABLE course ADD CONSTRAINT chk_credits_number CHECK (credits > 0);');
     }
 
     /**
