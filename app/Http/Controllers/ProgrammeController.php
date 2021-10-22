@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Programme;
 use Illuminate\Http\Request;
 
-class PaeController extends Controller {
+class ProgrammeController extends Controller
+{
 
     public function getStudentBulletin($id)
     {

@@ -21,9 +21,10 @@
   @endauth
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">PAE</a>
-      <a class="nav-item nav-link" href="#">CAVP</a>
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>      
+      <a class="nav-item nav-link" href="programme">Programme</a>
+      <a class="nav-item nav-link" href="pae">PAE</a>
+      <a class="nav-item nav-link" href="cavp">CAVP</a>
     </div>
   </div>
 </nav>

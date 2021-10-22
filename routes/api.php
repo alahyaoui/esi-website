@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\ProgrammeController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/programme', [ProgrammeController::class, 'test']);
+
+Route::get('/pae', [ProgrammeController::class, 'test']);
