@@ -31,3 +31,7 @@ Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// TODO: Add file upload routes (and Controller)
+// https://www.positronx.io/laravel-file-upload-with-validation/
