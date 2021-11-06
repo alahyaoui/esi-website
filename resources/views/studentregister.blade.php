@@ -11,19 +11,27 @@
 
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
+
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        Upload Validation Error<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
-                </div>
-
-                <div class="card-body">
-
-                    <!-- <form method="POST" action="{{ route('home') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('storeStudent') }}" enctype="multipart/form-data">
 
                         @csrf
 
@@ -113,7 +121,7 @@
                             </div>
                         </div>
 
-                    </form> -->
+                    </form>
 
                 </div>
 

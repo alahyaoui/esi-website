@@ -24,6 +24,7 @@
       <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="#">PAE</a>
       <a class="nav-item nav-link" href="#">CAVP</a>
+      <a class="nav-item nav-link" href="{{ url('studentregister') }}">S'inscrire à l'ESI</a>
     </div>
   </div>
 </nav>
