@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Bloc extends Model
 {
     use HasFactory;
 
-    // protected $table = 'section';
-    // protected $primaryKey = 'section';
+    // protected $table = 'bloc';
+    // protected $primaryKey = 'bloc'; 
 
     // protected $fillable = [
-    //     'section'
+    //     'bloc'
     // ];
 }

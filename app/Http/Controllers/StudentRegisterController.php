@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bloc;
+use App\Models\File;
+use App\Models\Section;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentRegisterController extends Controller {
@@ -16,10 +20,43 @@ class StudentRegisterController extends Controller {
         return view('studentregister');
     }
 
-    function store(Request $request) {
-        $this->validate($request, [
-            'select_file' => 'required|mimes:jpeg,jpg,png,pdf|max:2048'
+    public function store(Request $request) {
+
+        $student = new Student();
+
+        $student->first_name = $request->first_name;
+        $student->last_name = $request->last_name;
+        $student->bloc = $request->bloc;
+        $student->section = $request->section;
+        $student->save();
+
+        $request->validate([
+            'cess' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'cid' => 'required|mimes:pdf,jpg,jpeg,png|max:2048'
         ]);
-        return back()->with('success', 'Image Uploaded Successfully');
+
+        $fileModel = new File;
+
+        if ($request->file('cess')) {
+            $fileName = time() . '_' . $request->cess->getClientOriginalName();
+            $filePath = $request->file('cess')->storeAs('uploads', $fileName, 'public');
+
+            $fileModel->name = time() . '_' . $request->cess->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->save();
+        }
+
+        $fileModel = new File();
+
+        if ($request->file('cid')) {
+            $fileName = time() . '_' . $request->cid->getClientOriginalName();
+            $filePath = $request->file('cid')->storeAs('uploads', $fileName, 'public');
+
+            $fileModel->name = time() . '_' . $request->cid->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->save();
+        }
+
+        return back()->with('success', 'Successful registration');
     }
 }
