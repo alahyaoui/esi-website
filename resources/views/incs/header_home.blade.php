@@ -24,10 +24,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="programme">Programme</a>
-            <a class="nav-item nav-link" href="pae">PAE</a>
-            <a class="nav-item nav-link" href="cavp">CAVP</a>
-            <a class="nav-item nav-link" href="{{ url('studentregister') }}">S'inscrire à l'ESI</a>
+            <a class="nav-item nav-link" href="login">Login</a>
+            <a class="nav-item nav-link" href="register">Register</a>
         </div>
     </div>
 </nav>
