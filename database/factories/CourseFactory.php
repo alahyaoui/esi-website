@@ -27,6 +27,8 @@ class CourseFactory extends Factory
             'title' => Str::random(5),
             'description' => Str::random(10),
             'bloc' => rand(1, 3),
+            'quadri' => rand(1, 6),
+            'credits' => rand(1, 30),
         ];
     }
 }
