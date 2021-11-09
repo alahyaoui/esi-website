@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 class ProgrammeController extends Controller
 {
 
-    public function getStudentBulletin($id)
+    public function getStudentBulletin($matricule)
     {
-        $pae = Programme::all()->where("student", "=", $id);
+        // TODO: join libelle, ects, heures ON course
+        $pae = Programme::all()->where("student", "=", $matricule);
         return response()->json($pae);
     }
 
@@ -24,8 +25,8 @@ class ProgrammeController extends Controller
                 "libelle" => "developpement 2",
                 "ects" => 3,
                 "heures" => 25,
-                "Quadrimestre"  => 1,
-                "bloc"  => 1,
+                "Quadrimestre" => 1,
+                "bloc" => 1,
                 "is_validate" => True
 
             ],
@@ -34,8 +35,8 @@ class ProgrammeController extends Controller
                 "libelle" => "Web developpement 2",
                 "ects" => 3,
                 "heures" => 25,
-                "Quadrimestre"  => 2,
-                "bloc"  => 1,
+                "Quadrimestre" => 2,
+                "bloc" => 1,
                 "is_validate" => True
 
             ],
@@ -44,8 +45,8 @@ class ProgrammeController extends Controller
                 "libelle" => "developpement 3",
                 "ects" => 3,
                 "heures" => 25,
-                "Quadrimestre"  => 3,
-                "bloc"  => 2,
+                "Quadrimestre" => 3,
+                "bloc" => 2,
                 "is_validate" => True
 
             ],
@@ -54,19 +55,19 @@ class ProgrammeController extends Controller
                 "libelle" => "Web developpement 4",
                 "ects" => 3,
                 "heures" => 25,
-                "Quadrimestre"  => 4,
-                "bloc"  => 2,
+                "Quadrimestre" => 4,
+                "bloc" => 2,
                 "is_validate" => True
 
             ],
-        
+
             [
                 "acronyme" => "WEBG5",
                 "libelle" => "Web developpement 5",
                 "ects" => 3,
                 "heures" => 25,
-                "Quadrimestre"  => 5,
-                "bloc"  => 3,
+                "Quadrimestre" => 5,
+                "bloc" => 3,
                 "is_validate" => False
             ],
             [
@@ -74,12 +75,12 @@ class ProgrammeController extends Controller
                 "libelle" => "Stage",
                 "ects" => 3,
                 "heures" => 25,
-                "Quadrimestre"  => 6,
-                "bloc"  => 3,
+                "Quadrimestre" => 6,
+                "bloc" => 3,
                 "is_validate" => False
             ],
 
-            
+
         ];
 
         echo json_encode($p);
