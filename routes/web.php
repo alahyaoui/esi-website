@@ -26,6 +26,14 @@ Route::get('/example', function () {
     return view('example');
 });
 
+Route::get('/programme', function () {
+    return view('programme');
+});
+
+Route::get('/pae', function () {
+    return view('pae');
+});
+
 Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
