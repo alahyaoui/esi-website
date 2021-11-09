@@ -21,13 +21,14 @@ class StudentRegisterController extends Controller {
     }
 
     public function store(Request $request) {
-
+        
         $student = new Student();
-
+        
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->bloc = $request->bloc;
         $student->section = $request->section;
+        
         $student->save();
 
         $request->validate([
@@ -35,28 +36,32 @@ class StudentRegisterController extends Controller {
             'cid' => 'required|mimes:pdf,jpg,jpeg,png|max:2048'
         ]);
 
-        $fileModel = new File;
+        $cess_file = new File();
 
         if ($request->file('cess')) {
             $fileName = time() . '_' . $request->cess->getClientOriginalName();
             $filePath = $request->file('cess')->storeAs('uploads', $fileName, 'public');
 
-            $fileModel->name = time() . '_' . $request->cess->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->save();
+            $cess_file->student = $student->matricule;
+            $cess_file->name = time() . '_' . $request->cess->getClientOriginalName();
+            $cess_file->file_path = '/storage/' . $filePath;
         }
 
-        $fileModel = new File();
+        $cid_file = new File();
 
         if ($request->file('cid')) {
             $fileName = time() . '_' . $request->cid->getClientOriginalName();
             $filePath = $request->file('cid')->storeAs('uploads', $fileName, 'public');
 
-            $fileModel->name = time() . '_' . $request->cid->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->save();
+            $cid_file->student = $student->matricule;
+            $cid_file->name = time() . '_' . $request->cid->getClientOriginalName();
+            $cid_file->file_path = '/storage/' . $filePath;
         }
 
-        return back()->with('success', 'Successful registration');
+        if (!$cess_file->save() || !$cid_file->save()) {
+            Student::where('matricule', $student->matricule)->delete();
+        }
+
+        return back()->with('success', 'Inscription réussie');
     }
 }

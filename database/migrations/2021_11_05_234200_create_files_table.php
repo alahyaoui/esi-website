@@ -18,8 +18,8 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
 
-            // $table->integer('student');
-            // $table->foreign('student')->on('student')->references('matricule');
+            $table->integer('student');
+            $table->foreign('student')->on('student')->references('matricule');
 
             // $table->string('type'); // TODO: Type de fichier??
 

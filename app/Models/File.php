@@ -12,6 +12,7 @@ class File extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'student',
         'name',
         'file_path'
     ];

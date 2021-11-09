@@ -30,7 +30,7 @@
                     </div>
                     @endif
 
-
+                    @if(!isset($message))
                     <form method="POST" action="{{ route('storeStudent') }}" enctype="multipart/form-data">
 
                         @csrf
@@ -122,6 +122,7 @@
                         </div>
 
                     </form>
+                    @endif
 
                 </div>
 
