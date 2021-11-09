@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             // foreign key
             $table->integer('matricule')->nullable();
-            $table->foreign('matricule')->references('matricule')->on('student');
+            $table->foreign('matricule')->references('matricule')->on('student')->onDelete('cascade');
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_secretary')->default(false);
             $table->boolean('is_student')->default(true);
