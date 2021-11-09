@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StudentRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +40,11 @@ Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
+Route::get('/studentregister', 'App\Http\Controllers\StudentRegisterController@index')->name('studentregister');
+
+Route::post('studentregister', 'App\Http\Controllers\StudentRegisterController@store')->name('storeStudent');
 
 // TODO: Add file upload routes (and Controller)
 // https://www.positronx.io/laravel-file-upload-with-validation/

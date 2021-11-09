@@ -21,7 +21,7 @@ class CreateFilesTable extends Migration
             $table->integer('student');
             $table->foreign('student')->on('student')->references('matricule');
 
-            $table->string('type'); // TODO: Type de fichier??
+            // $table->string('type'); // TODO: Type de fichier??
 
             $table->string('name')->nullable();
             $table->string('file_path')->nullable();
