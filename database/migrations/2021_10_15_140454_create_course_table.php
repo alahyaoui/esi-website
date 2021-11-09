@@ -21,7 +21,7 @@ class CreateCourseTable extends Migration
             $table->integer('credits');
             $table->integer('hours');
             $table->integer('bloc');
-            $table->foreign('bloc')->on('bloc')->references('bloc');
+            $table->foreign('bloc')->on('bloc')->references('bloc')->onDelete('cascade');
         });
         DB::statement('ALTER TABLE course ADD CONSTRAINT chk_quadri_number CHECK (quadri IN (1,2,3,4,5,6));');
         DB::statement('ALTER TABLE course ADD CONSTRAINT chk_credits_number CHECK (credits > 0);');

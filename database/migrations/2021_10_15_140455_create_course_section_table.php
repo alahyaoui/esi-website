@@ -15,10 +15,9 @@ class CreateCourseSectionTable extends Migration
     {
         Schema::create('course_section', function (Blueprint $table) {
             $table->string('course');
-            $table->foreign('course')->on('course')->references('title');
+            $table->foreign('course')->on('course')->references('title')->onDelete('cascade');;
             $table->char('section');
-            $table->foreign('section')->on('section')->references('section');
-
+            $table->foreign('section')->on('section')->references('section')->onDelete('cascade');;
             $table->primary(array('course', 'section'));
         });
     }
