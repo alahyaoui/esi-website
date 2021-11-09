@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Section;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +16,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            BlocSeeder::class,
             SectionSeeder::class,
+            BlocSeeder::class,
+            StudentSeeder::class,
+            CourseSeeder::class,
+            CourseSectionSeeder::class,
+            ProgrammeSeeder::class
         ]);
     }
 }
