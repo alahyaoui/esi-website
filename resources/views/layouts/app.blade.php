@@ -12,7 +12,12 @@
         <title>Tableau de bord</title>
     </head>
     <body>
-        @include('incs.header')
+
+        @if(Auth::check())
+            @include('incs.header')
+        @else
+            @include('incs.header_home')
+        @endif
 
         @yield('content')
 
