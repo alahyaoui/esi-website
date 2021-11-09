@@ -35,6 +35,7 @@ class CourseSeeder extends Seeder
                 'description' => $value[2],
                 'quadri' => $quadri,
                 'credits' => (int) $value[3],
+                'hours' => (int)$value[4],
                 'bloc' => $quadri % 2 == 0 ? $quadri / 2 : (($quadri + 1) / 2)
             ]);
             if ($section == 'RI') {
