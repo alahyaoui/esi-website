@@ -18,10 +18,16 @@ class CreateStudentTable extends Migration
             $table->id('matricule');
             $table->string('first_name');
             $table->string('last_name');
+
             $table->integer('bloc');
             $table->foreign('bloc')->on('bloc')->references('bloc');
+
             $table->char('section');
             $table->foreign('section')->on('section')->references('section');
+
+            $table->integer('user_id');
+            $table->foreign('user_id')->on('users')->references('id');
+
             $table->timestamps();
         });
 
