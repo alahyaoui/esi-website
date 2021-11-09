@@ -19,6 +19,7 @@ class CreateCourseTable extends Migration
             $table->string('description');
             $table->integer('quadri');
             $table->integer('credits');
+            $table->integer('hours');
             $table->integer('bloc');
             $table->foreign('bloc')->on('bloc')->references('bloc');
         });

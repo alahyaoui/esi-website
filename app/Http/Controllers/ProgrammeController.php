@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Programme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProgrammeController extends Controller
 {
 
     public function getStudentBulletin($matricule)
     {
-        // TODO: join libelle, ects, heures ON course
-        $pae = Programme::all()->where("student", "=", $matricule);
+        $pae = DB::table('programme')
+            ->join('course', 'programme.course', '=', 'course.title')
+            ->select('programme.*', 'course.description as courseDesc',
+                'course.credits as courseCredits', 'course.quadri as courseQuadri',
+                'course.hours as courseHours')
+            ->where('programme.student', '=', $matricule)
+            ->get();
         return response()->json($pae);
     }
 
