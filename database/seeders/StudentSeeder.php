@@ -23,6 +23,7 @@ class StudentSeeder extends Seeder
             'last_name' => "Bendaimi",
             'bloc' => 3,
             'section' => "G",
+            'user_id' => 1
         ]);
     }
 }

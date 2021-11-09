@@ -10,8 +10,14 @@ use Illuminate\Support\Facades\DB;
 class ProgrammeController extends Controller
 {
 
-    public function getStudentBulletin($matricule)
+    public function getStudentBulletin($user_id)
     {
+        $matricule = DB::table('student')
+            ->select('matricule')
+            ->where('user_id', '=', $user_id)
+            ->get()[0]
+            ->matricule;
+
         $pae = DB::table('programme')
             ->join('course', 'programme.course', '=', 'course.title')
             ->select('programme.*', 'course.description as courseDesc',

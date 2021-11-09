@@ -36,8 +36,8 @@
                     '</thead>'
                 );
             }
-            
-            $.post("api/programme/" + {{Auth::user()->matricule}}, function (data, status) {
+
+            $.post("api/programme/" + {{Auth::user()->id}}, function (data, status) {
                 if (data.length === 0) {
                     $("#present").text("Vous n'avez pas de PAE");
                 }
