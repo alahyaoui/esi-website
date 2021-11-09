@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CourseSeeder extends Seeder
 {
+ 
     /**
      * Run the database seeds.
      *
@@ -16,8 +17,18 @@ class CourseSeeder extends Seeder
     public function run()
     {
         // Course::factory()->count(50)->create();
-        $csv = array_map('str_getcsv', file(resource_path('data\\cours.csv')));
         Course::truncate();
+        CourseSeeder::seedDB();
+        CourseSeeder::seedSection('G');
+        CourseSeeder::seedSection('I');
+        CourseSeeder::seedSection('R');
+        CourseSeeder::seedSection('RI');
+
+
+    }
+    private function seedSection($section){
+        $csv = array_map('str_getcsv', file(resource_path('data\\' . $section .'.csv')));
+        
         foreach ($csv as $value) {
             $quadri = (int)$value[0][1];
             DB::table('course')->insert([
@@ -27,6 +38,40 @@ class CourseSeeder extends Seeder
                 'credits' => (int) $value[3],
                 'bloc' => $quadri % 2 == 0 ? $quadri / 2 : (($quadri + 1) / 2)
             ]);
-        }
+            if($section == 'RI'){
+                DB::table('course_section')->insert([
+                    'course'=> $value[1],
+                    'section'=>'R',
+                ]);
+                DB::table('course_section')->insert([
+                    'course'=> $value[1],
+                    'section'=>'I',
+                ]);
+
+            }else{
+                DB::table('course_section')->insert([
+                    'course'=> $value[1],
+                    'section'=>$section,
+                ]);
+            }
+          
     }
+
+}
+private function seedDB(){
+    $csv = array_map('str_getcsv', file(resource_path('data\\commun.csv')));
+     
+        foreach ($csv as $value) {
+            $quadri = (int)$value[0][1];
+            DB::table('course')->insert([
+                'title' => $value[1],
+                'description' => $value[2],
+                'quadri' => $quadri,
+                'credits' => (int) $value[3],
+                'bloc' => $quadri % 2 == 0 ? $quadri / 2 : (($quadri + 1) / 2)
+            ]);
+    }
+}
+
+
 }
