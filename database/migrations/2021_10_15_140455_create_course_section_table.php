@@ -18,7 +18,6 @@ class CreateCourseSectionTable extends Migration
             $table->foreign('course')->on('course')->references('title');
             $table->char('section');
             $table->foreign('section')->on('section')->references('section');
-
             $table->primary(array('course', 'section'));
         });
     }
