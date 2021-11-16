@@ -17,11 +17,11 @@ use App\Http\Controllers\StudentRegisterController;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('index');
 });
 
 Route::get('/index', function () {
-    return view('layouts.app');
+    return view('index');
 });
 
 Route::get('/example', function () {
