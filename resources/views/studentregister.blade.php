@@ -11,8 +11,9 @@
 
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
-
                 <div class="card-body">
+
+                @if(!$isExpired)
 
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -123,6 +124,12 @@
 
                     </form>
                     @endif
+
+                @else
+                    <div class="alert alert-danger">
+                            La période d'inscription est terminé !
+                    </div>
+                @endif
 
                 </div>
 
