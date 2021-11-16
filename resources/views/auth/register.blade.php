@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
-                            <meta name="csrf-token" content="{{ csrf_token() }}">
+                            @csrf
 
                             <div class="form-group row">
                                 <label for="email"
