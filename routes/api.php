@@ -24,4 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/programme/{matricule}', [ProgrammeController::class, 'getStudentBulletin']);
 
 // TODO: plus tard appel une methode differente
-Route::get('/pae/{maticule}', [ProgrammeController::class, 'getStudentBulletin']);
+Route::post('/pae/{maticule}', [ProgrammeController::class, 'getStudentBulletin']);

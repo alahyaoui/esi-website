@@ -25,7 +25,7 @@
     <script>
         $(document).ready(function () {
 
-            $.get("api/pae/" + {{Auth::user()->id}}, function (data, status) {
+            $.post("api/pae/" + {{Auth::user()->id}}, function (data, status) {
                 if (data.length === 0) {
                     $("#present").text("Vous n'avez pas de PAE");
                 }
