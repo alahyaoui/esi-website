@@ -23,5 +23,8 @@ class SectionSeeder extends Seeder
         DB::table('section')->insert([
             'section' => 'R'
         ]);
+        DB::table('section')->insert([
+            'section' => 'GIR'
+        ]);
     }
 }

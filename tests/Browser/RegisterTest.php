@@ -9,11 +9,11 @@ use Tests\DuskTestCase;
 class RegisterTest extends DuskTestCase
 {
     /**
-     * A Dusk test example.
+     * Test of the registering page.
      *
      * @return void
      */
-    public function testExample()
+    public function testRegister()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
