@@ -19,8 +19,7 @@
                 <br>
                 <br>
                 <h2> École Supérieure d'Informatique </h2>
-               
-                    <h4>HE2B - ESI</h4>
+                <h4>HE2B - ESI</h4>
                 <p>
                     <br> 
                     L'ESI délivre le grade de BA (Bachelier/Bachelor) en Informatique. La durée des études est de trois ans, et il y a trois sections:
@@ -39,6 +38,7 @@
                     <br>
                     Rue Royale 67
                     1000 Bruxelles
+
                 </p>
                  
                 </div>
