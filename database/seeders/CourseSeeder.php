@@ -69,6 +69,10 @@ class CourseSeeder extends Seeder
                 'hours' => (int)$value[4],
                 'bloc' => $quadri % 2 == 0 ? $quadri / 2 : (($quadri + 1) / 2)
             ]);
+            DB::table('course_section')->insert([
+                'course' => $value[1],
+                'section' => "GIR",
+            ]);
         }
     }
 }

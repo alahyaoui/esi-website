@@ -17,7 +17,7 @@ class ProgrammeSeeder extends Seeder
     public function run()
     {
 
-        $courses = DB::select('select * from course_section where section = ?', ['G']);
+        $courses = DB::select('select * from course_section where section like \'G%\'');
         if ($courses != null) {
             foreach ($courses as $course) {
                 $rand = rand(0, 1);

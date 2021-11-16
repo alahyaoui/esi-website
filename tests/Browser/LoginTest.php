@@ -9,11 +9,11 @@ use Tests\DuskTestCase;
 class LoginTest extends DuskTestCase
 {
     /**
-     * A Dusk test example.
+     * Test of the login page.
      *
      * @return void
      */
-    public function testExample()
+    public function testLoginPage()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
@@ -22,6 +22,23 @@ class LoginTest extends DuskTestCase
                 ->assertSee('Password')
                 ->assertSee('Remember Me')
                 ->assertSee('Forgot Your Password?');
+        });
+    }
+
+    /**
+     * Test of the views obtained on success.
+     *
+     * @return void
+     */
+    public function testLoginSucces()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                ->type('email', "54247@gmail.com")
+                ->type('password', "dewdew")
+                ->press('Login')
+                ->assertPathIs('/home')
+                ->assertSee('You are logged in!');
         });
     }
 }

@@ -17,7 +17,7 @@ class CreateSectionTable extends Migration
         Schema::create('section', function (Blueprint $table) {
             $table->char('section')->primary();
         });
-        DB::statement('ALTER TABLE section ADD CONSTRAINT chk_section_char CHECK (section IN (\'G\',\'I\',\'R\'));');
+        DB::statement('ALTER TABLE section ADD CONSTRAINT chk_section_char CHECK (section IN (\'G\',\'I\',\'R\',\'GIR\'));');
     }
 
     /**
