@@ -25,5 +25,14 @@ class StudentSeeder extends Seeder
             'section' => "G",
             'user_id' => 1
         ]);
+
+        DB::table('student')->insert([
+            'matricule' => 54985,
+            'first_name' => "Amine-Ayoub",
+            'last_name' => "Bigham",
+            'bloc' => 3,
+            'section' => "G",
+            'user_id' => 2
+        ]);
     }
 }
