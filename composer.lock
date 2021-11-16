@@ -1128,11 +1128,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
-            "time": "2021-11-09T22:48:33+00:00"
-=======
             "time": "2021-11-02T13:53:22+00:00"
->>>>>>> master
         },
         {
             "name": "laravel/sanctum",
