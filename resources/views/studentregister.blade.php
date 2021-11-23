@@ -13,7 +13,11 @@
 
                 <div class="card-body">
 
+<<<<<<< HEAD
                 @if(!$isExpired)
+=======
+                    @if(!$isExpired)
+>>>>>>> g53183_liste_etudiants
 
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -108,9 +112,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="cess" class="col-md-4 col-form-label text-md-right" style="pointer-events: none;">Carte d'identité</label>
+                            <label for="cid" class="col-md-4 col-form-label text-md-right" style="pointer-events: none;">Carte d'identité</label>
                             <div class="col-md-6">
-                                <input id="cess" type="file" class="form-control-file" name="cid" accept=".pdf,.png,.jpg,.jpeg" required>
+                                <input id="cid" type="file" class="form-control-file" name="cid" accept=".pdf,.png,.jpg,.jpeg" required>
                             </div>
                         </div>
 
@@ -125,11 +129,19 @@
                     </form>
                     @endif
 
+<<<<<<< HEAD
                 @else
                     <div class="alert alert-danger">
                             La période d'inscription est terminé !
                     </div>
                 @endif
+=======
+                    @else
+                    <div class="alert alert-danger">
+                        La période d'inscription est terminé !
+                    </div>
+                    @endif
+>>>>>>> g53183_liste_etudiants
 
                 </div>
 

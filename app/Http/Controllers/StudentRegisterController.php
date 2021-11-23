@@ -19,7 +19,7 @@ class StudentRegisterController extends Controller {
      */
     public function index() {
         $currentDate = Carbon::today();
-        $limitDate = Carbon::create($currentDate->year . '-10-31');
+        $limitDate = Carbon::create($currentDate->year . '-12-31');
         $isExpired = $limitDate < $currentDate;
         return view('studentregister')->with('isExpired', $isExpired);
     }
@@ -65,7 +65,7 @@ class StudentRegisterController extends Controller {
         if (!$cess_file->save() || !$cid_file->save()) {
             Student::where('matricule', $student->matricule)->delete();
         }
-
+        
         return back()->with('success', 'Inscription réussie');
     }
 }
