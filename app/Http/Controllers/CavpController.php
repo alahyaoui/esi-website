@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Demande;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CavpController extends Controller
 {
@@ -15,10 +18,13 @@ class CavpController extends Controller
             ->where('user_id', '=', $user_id)
             ->get()[0]
             ->matricule;
+
         $demande = new Demande();
         $demande->student_matricule = $matricule;
-        $demande->last_name = $request->message;
+        $demande->message = $request->message_cavp;
         $demande->save();
-}
+
+        return view('cavpSuccess');
+    }
 
 }
