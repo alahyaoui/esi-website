@@ -7,9 +7,10 @@ use App\Models\File;
 use App\Models\Section;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class StudentRegisterController extends Controller {
-
 
     /**
      * Show the application dashboard.
@@ -17,7 +18,10 @@ class StudentRegisterController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('studentregister');
+        $currentDate = Carbon::today();
+        $limitDate = Carbon::create($currentDate->year . '-12-31');
+        $isExpired = $limitDate < $currentDate;
+        return view('studentregister')->with('isExpired', $isExpired);
     }
 
     public function store(Request $request) {
@@ -61,7 +65,7 @@ class StudentRegisterController extends Controller {
         if (!$cess_file->save() || !$cid_file->save()) {
             Student::where('matricule', $student->matricule)->delete();
         }
-
+        
         return back()->with('success', 'Inscription réussie');
     }
 }
