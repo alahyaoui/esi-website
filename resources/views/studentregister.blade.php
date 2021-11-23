@@ -13,11 +13,7 @@
 
                 <div class="card-body">
 
-<<<<<<< HEAD
-                @if(!$isExpired)
-=======
                     @if(!$isExpired)
->>>>>>> g53183_liste_etudiants
 
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -129,19 +125,11 @@
                     </form>
                     @endif
 
-<<<<<<< HEAD
-                @else
-                    <div class="alert alert-danger">
-                            La période d'inscription est terminé !
-                    </div>
-                @endif
-=======
                     @else
                     <div class="alert alert-danger">
                         La période d'inscription est terminé !
                     </div>
                     @endif
->>>>>>> g53183_liste_etudiants
 
                 </div>
 

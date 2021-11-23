@@ -8,6 +8,7 @@ use App\Models\Section;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class StudentRegisterController extends Controller {
@@ -32,6 +33,7 @@ class StudentRegisterController extends Controller {
         $student->last_name = $request->last_name;
         $student->bloc = $request->bloc;
         $student->section = $request->section;
+        $student->user_id = Auth::user()->id;
         
         $student->save();
 
