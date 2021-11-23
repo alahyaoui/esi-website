@@ -39,13 +39,15 @@ Route::get('/pae', function () {
 
 Auth::routes();
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::get('/studentregister', 'App\Http\Controllers\StudentRegisterController@index')->name('studentregister');
+Route::get('/studentregister', 'App\Http\Controllers\StudentRegisterController@index')
+    ->name('studentregister');
 
-Route::post('studentregister', 'App\Http\Controllers\StudentRegisterController@store')->name('storeStudent');
+Route::post('/studentregister', 'App\Http\Controllers\StudentRegisterController@store')
+    ->name('storeStudent');
 
 Route::get('/studentlist', 'App\Http\Controllers\StudentListController@index');
 
