@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateDemandeTable extends Migration
@@ -18,8 +19,15 @@ class CreateDemandeTable extends Migration
             $table->integer('student_matricule');
             $table->foreign('student_matricule')->on('student')->references('matricule');
             $table->longText('message');
+            $table->char('state')->default('E');
             $table->timestamps();
         });
+        /**
+         * E = EN COURS
+         * A = ACCEPTÉ
+         * R = REFUSÉ
+         */
+        DB::statement('ALTER TABLE demande ADD CONSTRAINT chk_state CHECK (state IN (\'E\', \'A\', \'R\'));');
     }
 
     /**
