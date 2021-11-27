@@ -9,33 +9,41 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class StudentRegisterController extends Controller {
+class StudentRegisterController extends Controller
+{
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index() {
+    public function index()
+    {
         $currentDate = Carbon::today();
         $limitDate = Carbon::create($currentDate->year . '-12-31');
         $isExpired = $limitDate < $currentDate;
         return view('studentregister')->with('isExpired', $isExpired);
     }
 
-    public function store(Request $request) {
-        
+    public function store(Request $request)
+    {
+
         $student = new Student();
-        
+
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->bloc = $request->bloc;
         $student->section = $request->section;
         $student->user_id = Auth::user()->id;
-        
+
         $student->save();
+
+        DB::table('users')
+            ->where('id', Auth::user()->id)
+            ->update(['is_student' => true]);
 
         $request->validate([
             'cess' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
@@ -67,7 +75,7 @@ class StudentRegisterController extends Controller {
         if (!$cess_file->save() || !$cid_file->save()) {
             Student::where('matricule', $student->matricule)->delete();
         }
-        
+
         return back()->with('success', 'Inscription réussie');
     }
 }
