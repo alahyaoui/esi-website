@@ -12,20 +12,18 @@ class RouteTest extends TestCase
     {
         $appURL = env('APP_URL');
 
-        $urls = [
+        $getUrls = [
             '/',
             '/index',
             '/example',
-            '/programme',
-            '/pae',
-            '/logout',
-            '/home',
+            //'/programme',
+            //'/logout',
             '/studentregister',
         ];
 
         echo PHP_EOL;
 
-        foreach ($urls as $url) {
+        foreach ($getUrls as $url) {
             $response = $this->get($url);
             if ((int)$response->status() !== 200) {
                 echo $appURL . $url . ' (FAILED) did not return a 200.';
