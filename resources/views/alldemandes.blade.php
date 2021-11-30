@@ -15,6 +15,10 @@
                                 @switch($demande->state)
                                     @case('E')
                                     <span>En cours</span>
+                                    <br>
+                                    <a href="/cavp/demande/accepter/{{$demande->id}}">Accepter</a>
+                                    ou
+                                    <a href="/cavp/demande/refuser/{{$demande->id}}">Refuser</a>
                                     @break
                                     @case('A')
                                     <span>Acceptée</span>
