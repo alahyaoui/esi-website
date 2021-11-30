@@ -44,6 +44,8 @@ Route::get('/cavp', function () {
 
 Route::get('/cavp/mydemandes', [CavpController::class, 'myDemandes']);
 
+Route::get('/cavp/alldemandes', [CavpController::class, 'findAllDemandes']);
+
 Route::post('/cavpSuccess', [CavpController::class, 'insertDemande'])->name('cavpSuccess');
 
 Auth::routes();

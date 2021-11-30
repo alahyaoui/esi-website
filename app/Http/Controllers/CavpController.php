@@ -27,6 +27,12 @@ class CavpController extends Controller
         return view('cavpSuccess');
     }
 
+    public function findAllDemandes()
+    {
+        $demandes = Demande::all();
+        return view('alldemandes')->with('demandes', $demandes);
+    }
+
     public function myDemandes()
     {
         $user_id = Auth::user()->id;
