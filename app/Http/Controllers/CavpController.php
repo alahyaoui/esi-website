@@ -29,7 +29,6 @@ class CavpController extends Controller
 
     public function myDemandes()
     {
-        // TODO: Get Demandes
         $user_id = Auth::user()->id;
 
         $matricule = DB::table('student')
@@ -42,8 +41,6 @@ class CavpController extends Controller
             ->where('student_matricule', '=', $matricule)
             ->get();
 
-        // TODO: Link view my demandes
-        //return response()->json($demandes);
         return view('mydemandes')->with('demandes', $demandes);
     }
 
