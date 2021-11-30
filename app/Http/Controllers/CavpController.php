@@ -50,4 +50,19 @@ class CavpController extends Controller
         return view('mydemandes')->with('demandes', $demandes);
     }
 
+    public function accepterDemande(Request $request)
+    {
+        DB::table('demande')
+            ->where('id', '=', $request->demande_id)
+            ->update(['state' => 'A']);
+        return redirect('/cavp/alldemandes');
+    }
+
+    public function refuserDemande(Request $request)
+    {
+        DB::table('demande')
+            ->where('id', '=', $request->demande_id)
+            ->update(['state' => 'R']);
+        return redirect('/cavp/alldemandes');
+    }
 }

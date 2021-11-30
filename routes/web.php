@@ -38,6 +38,7 @@ Route::get('/pae', function () {
     return view('pae');
 });
 
+/** CAVP */
 Route::get('/cavp', function () {
     return view('cavp');
 });
@@ -48,6 +49,10 @@ Route::get('/cavp/alldemandes', [CavpController::class, 'findAllDemandes']);
 
 Route::post('/cavpSuccess', [CavpController::class, 'insertDemande'])->name('cavpSuccess');
 
+Route::post('/cavp/demande/accepter', [CavpController::class, 'accepterDemande']);
+Route::post('/cavp/demande/refuser', [CavpController::class, 'refuserDemande']);
+
+/** **/
 Auth::routes();
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

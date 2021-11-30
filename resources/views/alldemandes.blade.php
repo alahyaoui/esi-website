@@ -16,9 +16,17 @@
                                     @case('E')
                                     <span>En cours</span>
                                     <br>
-                                    <a href="/cavp/demande/accepter/{{$demande->id}}">Accepter</a>
+                                    <form action="/cavp/demande/accepter" method="post">
+                                        @csrf
+                                        <input type="hidden" name="demande_id" value="{{$demande->id}}">
+                                        <button type="submit">Accepter</button>
+                                    </form>
                                     ou
-                                    <a href="/cavp/demande/refuser/{{$demande->id}}">Refuser</a>
+                                    <form action="/cavp/demande/refuser" method="post">
+                                        @csrf
+                                        <input type="hidden" name="demande_id" value="{{$demande->id}}">
+                                        <button type="submit">Refuser</button>
+                                    </form>
                                     @break
                                     @case('A')
                                     <span>Acceptée</span>
