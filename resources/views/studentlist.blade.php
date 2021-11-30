@@ -14,7 +14,7 @@
                 <ul class="list-group">
                     @foreach($allStudents as $student)
                     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_{{$student->matricule}}">
-                        {{ $student->first_name }} {{ $student->last_name }} (matricule : {{ $student->matricule }} )
+                        {{ $student->first_name }} {{ $student->last_name }} (matricule : {{ $student->id }} )
                         <span class="badge bg-warning rounded-pill align-badge-center">En cours de validation</span>
                     </a>
 

@@ -48,7 +48,7 @@ class StudentRegisterController extends Controller {
             $fileName = time() . '_' . $request->cess->getClientOriginalName();
             $filePath = $request->file('cess')->storeAs('uploads', $fileName, 'public');
 
-            $cess_file->student = $student->matricule;
+            $cess_file->student = $student->id;
             $cess_file->name = time() . '_' . $request->cess->getClientOriginalName();
             $cess_file->file_path = '/storage/' . $filePath;
         }
@@ -59,13 +59,13 @@ class StudentRegisterController extends Controller {
             $fileName = time() . '_' . $request->cid->getClientOriginalName();
             $filePath = $request->file('cid')->storeAs('uploads', $fileName, 'public');
 
-            $cid_file->student = $student->matricule;
+            $cid_file->student = $student->id;
             $cid_file->name = time() . '_' . $request->cid->getClientOriginalName();
             $cid_file->file_path = '/storage/' . $filePath;
         }
 
         if (!$cess_file->save() || !$cid_file->save()) {
-            Student::where('matricule', $student->matricule)->delete();
+            Student::where('id', $student->id)->delete();
         }
         
         return back()->with('success', 'Inscription réussie');

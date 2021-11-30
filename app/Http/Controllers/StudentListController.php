@@ -19,7 +19,7 @@ class StudentListController extends Controller {
 
         $allStudents = Student::all();
 
-        $allFiles = Student::join('files', 'student.matricule', '=', 'files.student')
+        $allFiles = Student::join('files', 'student.id', '=', 'files.student')
         ->get();
 
         // dd($allFiles);
