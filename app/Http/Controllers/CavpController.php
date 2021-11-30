@@ -42,9 +42,9 @@ class CavpController extends Controller
             ->where('student_matricule', '=', $matricule)
             ->get();
 
-
         // TODO: Link view my demandes
-        return response()->json($demandes);
+        //return response()->json($demandes);
+        return view('mydemandes')->with('demandes', $demandes);
     }
 
 }

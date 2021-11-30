@@ -27,7 +27,7 @@
             @if(Auth::User()->is_student)
                 <a class="nav-item nav-link" href="/programme">Programme</a>
                 <a class="nav-item nav-link" href="/pae">PAE</a>
-                <a class="nav-item nav-link" href="/cavp">CAVP</a>
+                <a class="nav-item nav-link" href="/cavp">Introduire une demande à la CAVP</a>
                 <a class="nav-item nav-link" href="/cavp/mydemandes">Mes demandes à la CAVP</a>
             @endif
             @if(!Auth::User()->is_student)

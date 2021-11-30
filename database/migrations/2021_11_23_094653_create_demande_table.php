@@ -19,7 +19,7 @@ class CreateDemandeTable extends Migration
             $table->integer('student_matricule');
             $table->foreign('student_matricule')->on('student')->references('matricule');
             $table->longText('message');
-            $table->char('state')->default('E');
+            $table->char('state', 1)->default('E');
             $table->timestamps();
         });
         /**
