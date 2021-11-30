@@ -25,9 +25,10 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
             @if(Auth::User()->is_student)
-                <a class="nav-item nav-link" href="programme">Programme</a>
-                <a class="nav-item nav-link" href="pae">PAE</a>
-                <a class="nav-item nav-link" href="cavp">CAVP</a>
+                <a class="nav-item nav-link" href="/programme">Programme</a>
+                <a class="nav-item nav-link" href="/pae">PAE</a>
+                <a class="nav-item nav-link" href="/cavp">CAVP</a>
+                <a class="nav-item nav-link" href="/cavp/mydemandes">Mes demandes à la CAVP</a>
             @endif
             @if(!Auth::User()->is_student)
                 <a class="nav-item nav-link" href="studentregister">S'inscrire à l'ESI</a>

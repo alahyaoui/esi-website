@@ -37,10 +37,15 @@ Route::get('/programme', function () {
 Route::get('/pae', function () {
     return view('pae');
 });
+
 Route::get('/cavp', function () {
     return view('cavp');
 });
+
+Route::get('/cavp/mydemandes', [CavpController::class, 'myDemandes']);
+
 Route::post('/cavpSuccess', [CavpController::class, 'insertDemande'])->name('cavpSuccess');
+
 Auth::routes();
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -56,7 +61,3 @@ Route::post('/studentregister', 'App\Http\Controllers\StudentRegisterController@
 Route::get('/studentlist', 'App\Http\Controllers\StudentListController@index');
 
 Route::get('/{path}', 'App\Http\Controllers\DownloadFileController@index')->name('download_file');
-
-
-// TODO: Add file upload routes (and Controller)
-// https://www.positronx.io/laravel-file-upload-with-validation/

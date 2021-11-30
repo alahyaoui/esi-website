@@ -27,4 +27,24 @@ class CavpController extends Controller
         return view('cavpSuccess');
     }
 
+    public function myDemandes()
+    {
+        // TODO: Get Demandes
+        $user_id = Auth::user()->id;
+
+        $matricule = DB::table('student')
+            ->select('matricule')
+            ->where('user_id', '=', $user_id)
+            ->get()[0]
+            ->matricule;
+
+        $demandes = DB::table('demande')
+            ->where('student_matricule', '=', $matricule)
+            ->get();
+
+
+        // TODO: Link view my demandes
+        return response()->json($demandes);
+    }
+
 }
