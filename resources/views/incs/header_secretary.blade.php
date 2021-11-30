@@ -25,6 +25,7 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="studentlist">Liste des inscriptions</a>
+            <a class="nav-item nav-link" href="/cavp/alldemandes">Liste des demandes pour la CAVP</a>
         </div>
     </div>
 </nav>
