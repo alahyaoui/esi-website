@@ -5,9 +5,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <br>
                 @if(count($demandes) >= 1)
                     @foreach($demandes as $demande)
+                        <br>
                         <div class="card">
                             <div class="card-header">
                                 <p>Par : {{$demande->student_matricule}}</p>
