@@ -26,4 +26,9 @@ class StudentListController extends Controller {
 
         return view('studentlist', compact('allStudents', 'allFiles'));
     }
+
+    
+    public function validateInscription($studentId) {
+        Student::where('id', $studentId)->update(array('is_validated' => 'true', 'is_inprogress' => 'false'));
+    }
 }

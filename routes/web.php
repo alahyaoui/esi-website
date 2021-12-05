@@ -53,5 +53,7 @@ Route::get('/studentlist', 'App\Http\Controllers\StudentListController@index');
 
 Route::get('/{path}', 'App\Http\Controllers\DownloadFileController@index')->name('download_file');
 
+Route::get('validate/{studentId}', 'App\Http\Controllers\StudentListController@validateInscription') ;
+
 // TODO: Add file upload routes (and Controller)
 // https://www.positronx.io/laravel-file-upload-with-validation/
