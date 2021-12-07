@@ -15,7 +15,6 @@ class RouteTest extends TestCase
         $urls = [
             '/',
             '/index',
-            '/example',
             '/programme',
             '/pae',
             '/logout',
