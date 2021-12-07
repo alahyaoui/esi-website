@@ -10,13 +10,14 @@ class Student extends Model
     use HasFactory;
 
     protected $table = 'student';
-    protected $primaryKey = 'matricule';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'first_name',
         'last_name',
         'bloc',
         'section',
-        'user_id'
+        'user_id', 
+        'matricule'
     ];
 }

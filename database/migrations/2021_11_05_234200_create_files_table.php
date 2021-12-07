@@ -19,7 +19,7 @@ class CreateFilesTable extends Migration
             $table->id();
 
             $table->integer('student');
-            $table->foreign('student')->on('student')->references('matricule')->onDelete('cascade');
+            $table->foreign('student')->on('student')->references('id')->onDelete('cascade');
 
             // $table->string('type'); // TODO: Type de fichier??
 

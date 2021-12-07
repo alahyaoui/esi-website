@@ -60,7 +60,7 @@
 
 @foreach($allFiles as $file)
 
-    @if($file->student == $student->matricule)
+    @if($file->student == $student->id)
     
         @if($count == 0)
             <form action="{{ route('download_file', $file->file_path) }}" method="GET" role="form" id="form">

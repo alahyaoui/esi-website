@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentRegisterController;
 use App\Http\Controllers\StudentListController;
 use App\Http\Controllers\CavpController;
+use App\Http\Controllers\InscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,10 @@ Route::post('/studentregister', 'App\Http\Controllers\StudentRegisterController@
 Route::get('/studentlist', 'App\Http\Controllers\StudentListController@index');
 
 Route::get('/{path}', 'App\Http\Controllers\DownloadFileController@index')->name('download_file');
+
+Route::get('validate/{studentMatricule}', 'App\Http\Controllers\InscriptionController@validateInscription') ;
+
+Route::get('refuse/{studentMatricule}/{message_refus}', 'App\Http\Controllers\InscriptionController@refuseInscription') ;
+
+// TODO: Add file upload routes (and Controller)
+// https://www.positronx.io/laravel-file-upload-with-validation/
