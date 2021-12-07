@@ -25,7 +25,7 @@ class ProgrammeController extends Controller {
 
         for ($i=0; $i < sizeof($courses) ; $i++) { 
             $is_accessible = false;
-            if(getBloc($courses[$i]) == 1 ){
+            if($this->getBloc($courses[$i]) == 1 ){
                 $is_accessible = true;
             }
                 
@@ -47,7 +47,7 @@ class ProgrammeController extends Controller {
     //Each year
     private function updateStudentBulletin($matricule){
         $pae = new PAE();
-        $courses_graph = $pae.get_graph();
+        $courses_graph = $pae->get_graph();
    
 
         $courses =  DB::table('programme')
@@ -68,14 +68,14 @@ class ProgrammeController extends Controller {
                 $is_accessible = true;
 
                //Prerequis
-               $prerequis = $courses_graph[$title].getPrerequis();
-               $is_accessible = isAllPrerequisValidated($prerequis);
+               $prerequis = $courses_graph[$title]->getPrerequis();
+               $is_accessible = $this->isAllPrerequisValidated($prerequis);
                
 
                //Corequis
                if($is_accessible){
-                    $corequis = $courses_graph[$title].getCorequis();
-                    $is_accessible = isAllCorequisAccessible($prerequis);
+                    $corequis = $courses_graph[$title]->getCorequis();
+                    $is_accessible = $this->isAllCorequisAccessible($prerequis);
                 }
 
                 //Update Course
@@ -100,7 +100,7 @@ class ProgrammeController extends Controller {
     private function isAllPrerequisValidated($prerequis){
         $are_all_validated = true;
         foreach ($prerequis as $prerequi) {
-            if(!isValidated($prerequi)){
+            if(!$this->isValidated($prerequi)){
                 $are_all_validated = false;
             }
         }
@@ -110,7 +110,7 @@ class ProgrammeController extends Controller {
     private function isAllCorequisAccessible($corequis){
         $are_all_accessible = true;
         foreach ($corequis as $corequi) {
-            if(!isAccessible($corequi)){
+            if(!$this->isAccessible($corequi)){
                 $are_all_accessible = false;
             }
         }
@@ -126,7 +126,7 @@ class ProgrammeController extends Controller {
             ->matricule;
 
         //On ne devrait pas faie ça ici mais plutot dans l'import des bulletins par le secretariat.
-        updateStudentBulletin($matricule);
+        $this->updateStudentBulletin($matricule);
 
         $programme = DB::table('programme')
             ->join('course', 'programme.course', '=', 'course.title')
