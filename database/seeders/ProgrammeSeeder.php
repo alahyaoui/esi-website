@@ -29,5 +29,23 @@ class ProgrammeSeeder extends Seeder
                 ]);
             }
         }
+        DB::table('programme')->insert([
+            'student' => 54985,
+            'course' => "WEBG4",
+            'is_validated' => false,
+            'cote' =>  0
+        ]);
+        DB::table('programme')->insert([
+            'student' => 54985,
+            'course' => "WEBG2",
+            'is_validated' => true,
+            'cote' =>  18
+        ]);
+        DB::table('programme')->insert([
+            'student' => 54985,
+            'course' => "WEBG5",
+            'is_validated' => false,
+            'cote' =>  0
+        ]);
     }
 }

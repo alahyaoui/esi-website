@@ -8,27 +8,33 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Business\PAE;
 
-class ProgrammeController extends Controller {
+class ProgrammeController extends Controller
+{
 
     //When student is created
-    public function initStudentBulletin($student_matricule){
+    public function initStudentBulletin($student_matricule)
+    {
         $section = DB::table('student')
             ->select('section')
             ->where('matricule', '=', $student_matricule)
             ->get()[0];
 
- 
+
         $courses = DB::table('course_section')
             ->select('course')
             ->where('section', '=', $section)
             ->get();
 
-        for ($i=0; $i < sizeof($courses) ; $i++) { 
+        for ($i = 0; $i < sizeof($courses); $i++) {
             $is_accessible = false;
+<<<<<<< HEAD
+            if ($this->getBloc($courses[$i]) == 1) {
+=======
             if($this->getBloc($courses[$i]) == 1 ){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                 $is_accessible = true;
             }
-                
+
             DB::table('programme')
                 ->insert([
                     'student' => $student_matricule,
@@ -39,34 +45,49 @@ class ProgrammeController extends Controller {
         }
     }
 
-    private function getBloc($course_title){
+    private function getBloc($course_title)
+    {
         return DB::table('course')->select('bloc')->where('title', '=', $course_title)->get()[0];
     }
-    
+
 
     //Each year
-    private function updateStudentBulletin($matricule){
+    private function updateStudentBulletin($matricule)
+    {
         $pae = new PAE();
         $courses_graph = $pae->get_graph();
+<<<<<<< HEAD
+
+=======
    
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
 
         $courses =  DB::table('programme')
-        ->select('course, is_accessible, is_validated')
-        ->where('student', '=', $matricule)
-        ->get();
+            ->select('course, is_accessible, is_validated')
+            ->where('student', '=', $matricule)
+            ->get();
 
-        foreach ($courses as $course){
-           $title = $course["course"];
-           $is_validated = $course["is_validated"];
+        foreach ($courses as $course) {
+            $title = $course["course"];
+            $is_validated = $course["is_validated"];
 
-           if($is_validated){
+            if ($is_validated) {
                 DB::table('programme')
-                ->where('course','=', $title)
-                ->update(['is_accessible' => false]);
-           }else{
-               //Current course
+                    ->where('course', '=', $title)
+                    ->update(['is_accessible' => false]);
+            } else {
+                //Current course
                 $is_accessible = true;
 
+<<<<<<< HEAD
+                //Prerequis
+                $prerequis = $courses_graph[$title]->getPrerequis();
+                $is_accessible = $this->isAllPrerequisValidated($prerequis);
+
+
+                //Corequis
+                if ($is_accessible) {
+=======
                //Prerequis
                $prerequis = $courses_graph[$title]->getPrerequis();
                $is_accessible = $this->isAllPrerequisValidated($prerequis);
@@ -74,51 +95,65 @@ class ProgrammeController extends Controller {
 
                //Corequis
                if($is_accessible){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                     $corequis = $courses_graph[$title]->getCorequis();
                     $is_accessible = $this->isAllCorequisAccessible($prerequis);
                 }
 
                 //Update Course
-               if($is_accessible){
-                   DB::table('programme')
-                   ->where('student','=', $matricule)
-                   ->where('course','=', $title)
-                   ->update(['is_accessible' => true]);
-               }  
-           }
+                if ($is_accessible) {
+                    DB::table('programme')
+                        ->where('student', '=', $matricule)
+                        ->where('course', '=', $title)
+                        ->update(['is_accessible' => true]);
+                }
+            }
         }
     }
 
-    private function isValidated($course_title){
+    private function isValidated($course_title)
+    {
         return DB::table('course')->select('is_validated')->where('title', '=', $course_title)->get()[0];
     }
 
-    private function isAccessible($course_title){
+    private function isAccessible($course_title)
+    {
         return DB::table('course')->select('is_accessible')->where('title', '=', $course_title)->get()[0];
     }
 
-    private function isAllPrerequisValidated($prerequis){
+    private function isAllPrerequisValidated($prerequis)
+    {
         $are_all_validated = true;
         foreach ($prerequis as $prerequi) {
+<<<<<<< HEAD
+            if (!$this->isValidated($prerequi)) {
+=======
             if(!$this->isValidated($prerequi)){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                 $are_all_validated = false;
             }
         }
         return $are_all_validated;
     }
 
-    private function isAllCorequisAccessible($corequis){
+    private function isAllCorequisAccessible($corequis)
+    {
         $are_all_accessible = true;
         foreach ($corequis as $corequi) {
+<<<<<<< HEAD
+            if (!$this->isAccessible($corequi)) {
+=======
             if(!$this->isAccessible($corequi)){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                 $are_all_accessible = false;
             }
         }
         return $are_all_accessible;
     }
-    
 
-    public function getStudentBulletin($user_id) {
+
+    public function getStudentBulletin($user_id)
+    {
         $matricule = DB::table('student')
             ->select('matricule')
             ->where('user_id', '=', $user_id)
@@ -130,12 +165,15 @@ class ProgrammeController extends Controller {
 
         $programme = DB::table('programme')
             ->join('course', 'programme.course', '=', 'course.title')
-            ->select('programme.*', 'course.description as courseDesc',
-                'course.credits as courseCredits', 'course.quadri as courseQuadri',
-                'course.hours as courseHours')
+            ->select(
+                'programme.*',
+                'course.description as courseDesc',
+                'course.credits as courseCredits',
+                'course.quadri as courseQuadri',
+                'course.hours as courseHours'
+            )
             ->where('programme.student', '=', $matricule)
             ->get();
         return response()->json($programme);
     }
-
 }
