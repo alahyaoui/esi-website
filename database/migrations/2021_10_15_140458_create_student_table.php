@@ -3,20 +3,20 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
-class CreateStudentTable extends Migration
-{
+
+class CreateStudentTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('student', function (Blueprint $table) {
             // $table->integer('matricule')->primary();
             $table->id();
-            $table->integer('matricule')->unique()->nullable();
+            $table->integer('matricule')->unique();
             $table->string('first_name');
             $table->string('last_name');
 
@@ -29,12 +29,12 @@ class CreateStudentTable extends Migration
             $table->integer('user_id')->unique();
             $table->foreign('user_id')->on('users')->references('id');
 
-            $table->boolean('is_validated')->default(false);
-
-            $table->boolean('is_inprogress')->default(true);
-
             $table->timestamps();
         });
+
+        // // DB::statement("create sequence matricule_seq");
+        // DB::statement("alter table student alter matricule set default nextval('matricule_seq')");
+        // // DB::statement("Select setval('matricule_seq', 2000051)");
     }
 
     /**
@@ -42,8 +42,7 @@ class CreateStudentTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('student');
     }
 }

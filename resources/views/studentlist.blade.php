@@ -12,10 +12,31 @@
                 <div class="card-header">{{ __('Liste des inscriptions') }}</div>
 
                 <ul class="list-group">
+
+                    @php($i=0)
+
                     @foreach($allStudents as $student)
+
                     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_{{$student->id}}">
-                        {{ $student->first_name }} {{ $student->last_name }} (matricule : {{ $student->id }} )
-                        <span id="badge_{{$student->id}}" class="badge bg-warning rounded-pill align-badge-center">En cours de validation</span>
+
+                        {{ $student->first_name }} {{ $student->last_name }} (matricule : {{ $student->matricule }} )
+
+
+                        @foreach($allInscriptions as $insc)
+                            @if($student->matricule == $insc->student_matricule)
+                                @switch($insc->state)
+                                @case('E')
+                                <span id="badge_{{$student->id}}" class="badge bg-warning rounded-pill align-badge-center">En cours de validation</span>
+                                @break
+                                @case('V')
+                                <span id="badge_{{$student->id}}" class="badge bg-success text-white rounded-pill align-badge-center">Validé</span>
+                                @break
+                                @case('R')
+                                <span id="badge_{{$student->id}}" class="badge bg-danger text-white rounded-pill align-badge-center">Refusé</span>
+                                @break
+                                @endswitch
+                            @endif
+                        @endforeach
                     </a>
 
                     <!-- Modal -->
@@ -53,11 +74,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <textarea class="form-control"></textarea>
+                                    <textarea id="message_refus_{{$student->id}}" class="form-control"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                    <button type="button" class="btn btn-success">Envoyer</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="changeStateRefused('{{ $student->id }}', '{{ $student->matricule }}')">Envoyer</button>
                                 </div>
                             </div>
                         </div>
@@ -78,30 +99,32 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="changeStateValidated()">Confirmer</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="changeStateValidated('{{ $student->id }}', '{{ $student->matricule }}')">Confirmer</button>
                                 </div>
-                                <!--"changeStateValidated('+{{$student->id}}+')"-->
                             </div>
                         </div>
                     </div>
 
                     <script>
-                        // let currentId = 0;
-                        // $(".modal").on('shown', function() {
-                        //     currentId = $(this).attr('id');
-                        // });
-                        function changeStateValidated() {
-                            $.get("validate/{{$student->id}}");
-                            // console.log("$currentId}")
-                            $("#badge_{{$student->id}}").removeClass();
-                            $("#badge_{{$student->id}}").addClass("badge bg-success rounded-pill align-badge-center")
-                            $("#badge_{{$student->id}}").text("Validé");
+                        function changeStateValidated(id, matricule) {
+                            $.get("validate/" + matricule);
+                            $("#badge_" + id).removeClass();
+                            $("#badge_" + id).text("Validé");
+                            $("#badge_" + id).addClass("badge bg-success text-white rounded-pill align-badge-center")
+                        }
+
+                        function changeStateRefused(id, matricule) {
+                            let message_refus = $("#message_refus_"+id).val();
+                            $.get("refuse/" + matricule + "/" + message_refus);
+                            $("#badge_" + id).removeClass();
+                            $("#badge_" + id).text("Refusé");
+                            $("#badge_" + id).addClass("badge bg-danger text-white rounded-pill align-badge-center")
                         }
                     </script>
 
+                    @php($i++)
+
                     @endforeach
-
-
 
                     <style>
                         .list-group-item>.badge {

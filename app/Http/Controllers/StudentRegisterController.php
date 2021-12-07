@@ -6,13 +6,14 @@ use App\Models\Bloc;
 use App\Models\File;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\Inscription;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class StudentRegisterController extends Controller {
-
+    
     /**
      * Show the application dashboard.
      *
@@ -24,16 +25,18 @@ class StudentRegisterController extends Controller {
         $isExpired = $limitDate < $currentDate;
         return view('studentregister')->with('isExpired', $isExpired);
     }
-
+    
     public function store(Request $request) {
         
         $student = new Student();
+        $count_seededStudent = Student::oldest()->get()->count();
         
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->bloc = $request->bloc;
         $student->section = $request->section;
         $student->user_id = Auth::user()->id;
+        $student->matricule = ($count_seededStudent == 0) ? 1 : Student::oldest()->get()[$count_seededStudent-1]->matricule + 1;
         
         $student->save();
 
@@ -67,6 +70,10 @@ class StudentRegisterController extends Controller {
         if (!$cess_file->save() || !$cid_file->save()) {
             Student::where('id', $student->id)->delete();
         }
+
+        $new_inscription = new Inscription();
+        $new_inscription->student_matricule = $student->matricule;
+        $new_inscription->save();
         
         return back()->with('success', 'Inscription réussie');
     }

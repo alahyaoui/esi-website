@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use App\Models\File;
+use App\Models\Inscription;
 
 use function GuzzleHttp\Promise\all;
 
@@ -19,16 +20,11 @@ class StudentListController extends Controller {
 
         $allStudents = Student::all();
 
-        $allFiles = Student::join('files', 'student.id', '=', 'files.student')
-        ->get();
+        $allFiles = Student::join('files', 'student.id', '=', 'files.student')->get();
 
-        // dd($allFiles);
+        $allInscriptions = Inscription::all();
 
-        return view('studentlist', compact('allStudents', 'allFiles'));
+        return view('studentlist', compact('allStudents', 'allFiles', 'allInscriptions'));
     }
 
-    
-    public function validateInscription($studentId) {
-        Student::where('id', $studentId)->update(array('is_validated' => 'true', 'is_inprogress' => 'false'));
-    }
 }
