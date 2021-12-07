@@ -31,7 +31,7 @@
                 <a class="nav-item nav-link" href="/cavp/mydemandes">Mes demandes à la CAVP</a>
             @endif
             @if(!Auth::User()->is_student)
-                <a class="nav-item nav-link" href="studentregister">S'inscrire à l'ESI</a>
+                <a class="nav-item nav-link" href="/studentregister">S'inscrire à l'ESI</a>
             @endif
         </div>
     </div>

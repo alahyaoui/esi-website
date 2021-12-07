@@ -18,7 +18,6 @@ class RouteTest extends TestCase
             '/index',
             '/example',
             '/studentregister',
-            '/cavp/alldemandes',
         ];
 
         echo PHP_EOL;
