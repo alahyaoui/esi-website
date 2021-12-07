@@ -27,7 +27,11 @@ class ProgrammeController extends Controller
 
         for ($i = 0; $i < sizeof($courses); $i++) {
             $is_accessible = false;
+<<<<<<< HEAD
             if ($this->getBloc($courses[$i]) == 1) {
+=======
+            if($this->getBloc($courses[$i]) == 1 ){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                 $is_accessible = true;
             }
 
@@ -52,7 +56,11 @@ class ProgrammeController extends Controller
     {
         $pae = new PAE();
         $courses_graph = $pae->get_graph();
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
 
         $courses =  DB::table('programme')
             ->select('course, is_accessible, is_validated')
@@ -71,6 +79,7 @@ class ProgrammeController extends Controller
                 //Current course
                 $is_accessible = true;
 
+<<<<<<< HEAD
                 //Prerequis
                 $prerequis = $courses_graph[$title]->getPrerequis();
                 $is_accessible = $this->isAllPrerequisValidated($prerequis);
@@ -78,6 +87,15 @@ class ProgrammeController extends Controller
 
                 //Corequis
                 if ($is_accessible) {
+=======
+               //Prerequis
+               $prerequis = $courses_graph[$title]->getPrerequis();
+               $is_accessible = $this->isAllPrerequisValidated($prerequis);
+               
+
+               //Corequis
+               if($is_accessible){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                     $corequis = $courses_graph[$title]->getCorequis();
                     $is_accessible = $this->isAllCorequisAccessible($prerequis);
                 }
@@ -107,7 +125,11 @@ class ProgrammeController extends Controller
     {
         $are_all_validated = true;
         foreach ($prerequis as $prerequi) {
+<<<<<<< HEAD
             if (!$this->isValidated($prerequi)) {
+=======
+            if(!$this->isValidated($prerequi)){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                 $are_all_validated = false;
             }
         }
@@ -118,7 +140,11 @@ class ProgrammeController extends Controller
     {
         $are_all_accessible = true;
         foreach ($corequis as $corequi) {
+<<<<<<< HEAD
             if (!$this->isAccessible($corequi)) {
+=======
+            if(!$this->isAccessible($corequi)){
+>>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
                 $are_all_accessible = false;
             }
         }

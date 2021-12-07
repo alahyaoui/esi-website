@@ -4,6 +4,8 @@ namespace App\Business;
 
 use Illuminate\Support\Facades\DB;
 use App\Business\Course;
+use Error;
+use PhpOption\None;
 
 class PAE
 {
@@ -28,22 +30,13 @@ class PAE
         array_push($this->graph, $course);
     }
 
-    private function getCourseByTitle($title)
-    {
-
-        for ($i = 0; $i < sizeof($this->graph); $i++) {
-            if ($this->graph[$i]->getTitle() == $title)
-                return $i;
-        }
-        return -1;
-    }
     private function init_graph()
     {
         $titles = DB::table('course')
             ->select('title')
             ->get();
         for ($i = 0; $i < sizeof($titles); $i++) {
-            $course = new Course($titles[$i]->title);
+            $course = new Course($titles[$i]);
             $this->add_course($course);
         }
     }
@@ -56,23 +49,46 @@ class PAE
     private function init_prerequis()
     {
         $csv = array_map('str_getcsv', file(resource_path('data\\prerequis.csv')));
+        $graph = $this->graph;
 
         foreach ($csv as $value) {
-
-            echo $value[0];
-            echo $value[1];
-
-            $this->graph[$this->getCourseByTitle($value[0])]
-                ->add_prerequis($this->graph[$this->getCourseByTitle($value[1])]);
+            $course = $this->getCourseFrom($graph, $value[0]);
+            $prerequis = $this->getCourseFrom($graph, $value[1]);
+            if ($course && $prerequis) {
+                $course->add_prerequis($prerequis);
+            } else {
+                throw new Error("Error course not found in graph.");
+            }
         }
+    }
+
+    private function getCourseFrom($graph, $course_title)
+    {
+        $course = NULL;
+        for ($i = 0; $i < sizeof($this->graph); $i++) {
+            $tmp = $this->$graph[$i];
+            if ($tmp->title == $course_title) {
+                $course = $tmp;
+                break;
+            }
+        }
+
+        return $course;
     }
 
     private function init_corequis()
     {
         $csv = array_map('str_getcsv', file(resource_path('data\\corequis.csv')));
+        $graph = $this->graph;
 
         foreach ($csv as $value) {
-            $this->graph[$value[0]]->add_corequis($this->graph[$value[1]]);
+            $course = $this->getCourseFrom($graph, $value[0]);
+            $prerequis = $this->getCourseFrom($graph, $value[1]);
+            if ($course && $prerequis) {
+                $course->add_corequis($prerequis);
+            } else {
+                throw new Error("Error course not found in graph.");
+            }
         }
     }
 }
