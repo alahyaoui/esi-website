@@ -8,7 +8,6 @@ class Course
     private $title;
     private $prerequis;
     private $corequis;
-<<<<<<< HEAD
 
 
     public function __construct($titleParam)
@@ -16,14 +15,6 @@ class Course
         $this->title = $titleParam;
         $this->prerequis = [];
         $this->corequis = [];
-=======
-    
-    //Functions
-    public function __construct($course_title){
-        $this->title = $course_title;
-        $this->prerequis = array();
-        $this->corequis = array();
->>>>>>> e681a69f342a977318159a0421c0230f086ecbfd
     }
     /**
      * Add a prerequis to the course
