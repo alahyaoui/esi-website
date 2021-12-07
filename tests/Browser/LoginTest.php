@@ -20,8 +20,7 @@ class LoginTest extends DuskTestCase
                 ->assertSee('Login')
                 ->assertSee('E-Mail Address')
                 ->assertSee('Password')
-                ->assertSee('Remember Me')
-                ->assertSee('Forgot Your Password?');
+                ->assertSee('Remember Me');
         });
     }
 

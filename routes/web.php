@@ -44,11 +44,8 @@ Route::get('/cavp', function () {
 });
 
 Route::get('/cavp/mydemandes', [CavpController::class, 'myDemandes']);
-
 Route::get('/cavp/alldemandes', [CavpController::class, 'findAllDemandes']);
-
 Route::post('/cavpSuccess', [CavpController::class, 'insertDemande'])->name('cavpSuccess');
-
 Route::post('/cavp/demande/accepter', [CavpController::class, 'accepterDemande']);
 Route::post('/cavp/demande/refuser', [CavpController::class, 'refuserDemande']);
 
