@@ -21,8 +21,10 @@ class CreateProgrammeTable extends Migration
             $table->string('course');
             $table->foreign('course')->on('course')->references('title');
 
-            $table->boolean('is_validated')->default(false);
             $table->integer('cote');
+            $table->boolean('is_validated')->default(false);
+            $table->boolean('is_accessible')-> default(false);
+            
             $table->primary(array('student', 'course'));
         });
         DB::statement('ALTER TABLE programme ADD CONSTRAINT chk_cote_number CHECK (cote >= 0);');
