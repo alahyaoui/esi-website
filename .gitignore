@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage/uploads/*
+!/public/storage/uploads/tst.txt
 /storage/*.key
 /vendor
 .env
