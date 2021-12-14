@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inscription;
-use Illuminate\Http\Request;
-use App\Models\Student;
 
 
 class InscriptionController extends Controller
@@ -19,14 +17,28 @@ class InscriptionController extends Controller
         //
     }
 
-       
-    public function validateInscription($studentMatricule) {
+    /**
+     * Valide l'inscription d'un étudiant.
+     *
+     * @param $studentMatricule
+     * @return void
+     */
+    public function validateInscription($studentMatricule)
+    {
         Inscription::join('student', 'inscriptions.student_matricule', '=', 'student.matricule')
-        ->where('student_matricule', $studentMatricule)->update(array('state' => 'V', 'message_refus' => ""));
+            ->where('student_matricule', $studentMatricule)->update(array('state' => 'V', 'message_refus' => ""));
     }
 
-    public function refuseInscription($studentMatricule, $message_refus) {
+    /**
+     * Refuse l'inscription d'un étudiant.
+     *
+     * @param $studentMatricule
+     * @param $message_refus
+     * @return void
+     */
+    public function refuseInscription($studentMatricule, $message_refus)
+    {
         Inscription::join('student', 'inscriptions.student_matricule', '=', 'student.matricule')
-        ->where('student_matricule', $studentMatricule)->update(array('state' => 'R', 'message_refus' => $message_refus));
+            ->where('student_matricule', $studentMatricule)->update(array('state' => 'R', 'message_refus' => $message_refus));
     }
 }
