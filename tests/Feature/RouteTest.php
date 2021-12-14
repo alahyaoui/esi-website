@@ -16,7 +16,10 @@ class RouteTest extends TestCase
         $getUrls = [
             '/',
             '/index',
-            '/example',
+            '/programme',
+            '/pae',
+            '/logout',
+            '/home',
             '/studentregister',
         ];
 

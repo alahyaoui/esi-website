@@ -51,11 +51,13 @@
                         '<td>' + data[i]["courseHours"] + '</td>'
                     );
 
-                    // TODO: rajouter bouton vide pas cochable pour le cours où il manque les prérquis
-                    if (data[i]["is_validated"]) {
-                        $('#' + i).append('<td><input type="checkbox" checked disabled="disabled"></td>');
-                        // Verifier le disabled !!!
-                    } else {
+                    if(!data[i]["is_accessible"]){
+                        if(data[i]["is_validated"]){
+                            $('#' + i).append('<td><input type="checkbox" checked disabled="disabled"></td>');
+                        }else{
+                            $('#' + i).append('<td><input type="checkbox" disabled="disabled"></td>');
+                        }
+                    }else{
                         $('#' + i).append('<td><input type="checkbox"></td>');
                     }
                 } // end for

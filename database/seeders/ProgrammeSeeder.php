@@ -29,5 +29,25 @@ class ProgrammeSeeder extends Seeder
                 ]);
             }
         }
+        DB::table('programme')->insert([
+            'student' => 54985,
+            'course' => "ANA2",
+            'is_validated' => true,
+            'is_accessible' => true,
+            'cote' =>  12
+        ]);
+        DB::table('programme')->insert([
+            'student' => 54985,
+            'course' => "DEV2",
+            'is_validated' => true,
+            'is_accessible' => true,
+            'cote' =>  16
+        ]);
+        DB::table('programme')->insert([
+            'student' => 54985,
+            'course' => "ANA3",
+            'is_validated' => false,
+            'cote' =>  0
+        ]);
     }
 }
