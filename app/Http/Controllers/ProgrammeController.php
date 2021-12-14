@@ -79,7 +79,7 @@ class ProgrammeController extends Controller
                //Corequis
                if($is_accessible){
                     $corequis = $courses_graph[$title]->getCorequis();
-                    $is_accessible = $this->isAllCorequisAccessible($prerequis);
+                    $is_accessible = $this->isAllCorequisAccessible($corequis);
                 }
 
                 //Update Course
