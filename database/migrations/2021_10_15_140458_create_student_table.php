@@ -26,7 +26,7 @@ class CreateStudentTable extends Migration {
             $table->char('section');
             $table->foreign('section')->on('section')->references('section');
 
-            $table->integer('user_id')->unique();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->on('users')->references('id');
 
             $table->timestamps();
