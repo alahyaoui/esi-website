@@ -12,6 +12,9 @@ class ProgrammeController extends Controller
 {
 
     //When student is created
+    /**
+     * Construit un bulletin initiale pour les primo-inscris
+     */
     public function initStudentBulletin($student_matricule)
     {
         $section = DB::table('student')
@@ -40,7 +43,9 @@ class ProgrammeController extends Controller
                 ]);
         }
     }
-
+    /**
+     * Retourne le numéro du bloc du cours
+     */
     private function getBloc($course_title)
     {
         return DB::table('course')->select('bloc')->where('title', '=', $course_title)->get()[0];
@@ -48,6 +53,9 @@ class ProgrammeController extends Controller
 
 
     //Each year
+    /**
+     * Construit le bulletin d'un étudiant
+     */
     private function updateStudentBulletin($matricule)
     {
         $pae = new PAE();
@@ -92,17 +100,23 @@ class ProgrammeController extends Controller
             }
         }
     }
-
+    /**
+     * Vérifie la validité d'un cours
+     */
     private function isValidated($course_title)
     {
         return DB::table('course')->select('is_validated')->where('title', '=', $course_title)->get()[0];
     }
-
+    /**
+     * Vérifie l'accessibilité d'un cours
+     */
     private function isAccessible($course_title)
     {
         return DB::table('course')->select('is_accessible')->where('title', '=', $course_title)->get()[0];
     }
-
+    /**
+     * Vérifie si tout les prérequis sont validés
+     */
     private function isAllPrerequisValidated($prerequis)
     {
         $are_all_validated = true;
@@ -113,7 +127,9 @@ class ProgrammeController extends Controller
         }
         return $are_all_validated;
     }
-
+    /**
+     * Vérifie si tout les corequis sont accessible
+     */
     private function isAllCorequisAccessible($corequis)
     {
         $are_all_accessible = true;
@@ -125,7 +141,9 @@ class ProgrammeController extends Controller
         return $are_all_accessible;
     }
 
-
+    /**
+     * Donne le programme d'un étudiant au format JSON
+     */
     public function getStudentBulletin($user_id)
     {
         $matricule = DB::table('student')
