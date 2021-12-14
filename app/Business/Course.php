@@ -19,16 +19,29 @@ class Course
     /**
      * Add a prerequis to the course
      */
-    public function add_prerequis($course){
+    public function add_prerequis($course)
+    {
         array_push($this->prerequis, $course);
     }
-    public function getPrerequis(){
+    public function getPrerequis()
+    {
         return $this->prerequis;
     }
+
     /**
      * Add a corequis to the course
      */
-    public function add_corequis($course){
+    public function add_corequis($course)
+    {
         array_push($this->corequis, $course);
-    }   
+    }
+    public function getCorequis()
+    {
+        return $this->corequis;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
 }

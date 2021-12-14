@@ -11,6 +11,14 @@ use App\Business\PAE;
 class ProgrammeController extends Controller
 {
 
+    private $user_id;
+
+    public function __construct()
+    {
+        $this->user_id = 0;
+    }
+
+
     //When student is created
     /**
      * Construit un bulletin initiale pour les primo-inscris
@@ -30,7 +38,7 @@ class ProgrammeController extends Controller
 
         for ($i = 0; $i < sizeof($courses); $i++) {
             $is_accessible = false;
-            if($this->getBloc($courses[$i]) == 1 ){
+            if ($this->getBloc($courses[$i]) == 1) {
                 $is_accessible = true;
             }
 
@@ -60,16 +68,16 @@ class ProgrammeController extends Controller
     {
         $pae = new PAE();
         $courses_graph = $pae->get_graph();
-   
+
 
         $courses =  DB::table('programme')
-            ->select('course, is_accessible, is_validated')
+            ->select('course', 'is_accessible', 'is_validated')
             ->where('student', '=', $matricule)
             ->get();
 
         foreach ($courses as $course) {
-            $title = $course["course"];
-            $is_validated = $course["is_validated"];
+            $title = $course->course;
+            $is_validated = $course->is_validated;
 
             if ($is_validated) {
                 DB::table('programme')
@@ -79,14 +87,14 @@ class ProgrammeController extends Controller
                 //Current course
                 $is_accessible = true;
 
-               //Prerequis
-               $prerequis = $courses_graph[$title]->getPrerequis();
-               $is_accessible = $this->isAllPrerequisValidated($prerequis);
-               
+                //Prerequis
+                $prerequis = $courses_graph[$pae->getCourseByTitle($title)]->getPrerequis();
+                $is_accessible = $this->isAllPrerequisValidated($prerequis);
 
-               //Corequis
-               if($is_accessible){
-                    $corequis = $courses_graph[$title]->getCorequis();
+
+                //Corequis
+                if ($is_accessible) {
+                    $corequis = $courses_graph[$pae->getCourseByTitle($title)]->getCorequis();
                     $is_accessible = $this->isAllCorequisAccessible($corequis);
                 }
 
@@ -105,14 +113,34 @@ class ProgrammeController extends Controller
      */
     private function isValidated($course_title)
     {
-        return DB::table('course')->select('is_validated')->where('title', '=', $course_title)->get()[0];
+        $matricule = DB::table('student')
+            ->select('matricule')
+            ->where('user_id', '=', $this->user_id)
+            ->get()[0]
+            ->matricule;
+
+        return DB::table('programme')
+            ->select('is_validated')
+            ->where('student', '=', $matricule)
+            ->where('course', '=', $course_title)
+            ->get()[0];
     }
     /**
      * Vérifie l'accessibilité d'un cours
      */
     private function isAccessible($course_title)
     {
-        return DB::table('course')->select('is_accessible')->where('title', '=', $course_title)->get()[0];
+        $matricule = DB::table('student')
+            ->select('matricule')
+            ->where('user_id', '=', $this->user_id)
+            ->get()[0]
+            ->matricule;
+
+        return DB::table('programme')
+            ->select('is_accessible')
+            ->where('matricule', '=', $matricule)
+            ->where('title', '=', $course_title)
+            ->get()[0];
     }
     /**
      * Vérifie si tout les prérequis sont validés
@@ -121,7 +149,7 @@ class ProgrammeController extends Controller
     {
         $are_all_validated = true;
         foreach ($prerequis as $prerequi) {
-            if(!$this->isValidated($prerequi)){
+            if (!$this->isValidated($prerequi->getTitle())) {
                 $are_all_validated = false;
             }
         }
@@ -134,7 +162,7 @@ class ProgrammeController extends Controller
     {
         $are_all_accessible = true;
         foreach ($corequis as $corequi) {
-            if(!$this->isAccessible($corequi)){
+            if (!$this->isAccessible($corequi->getTitle())) {
                 $are_all_accessible = false;
             }
         }
@@ -146,6 +174,7 @@ class ProgrammeController extends Controller
      */
     public function getStudentBulletin($user_id)
     {
+        $this->user_id = $user_id;
         $matricule = DB::table('student')
             ->select('matricule')
             ->where('user_id', '=', $user_id)
