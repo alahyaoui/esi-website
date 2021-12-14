@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
 
@@ -13,7 +12,6 @@ class DownloadFileController extends Controller
      *
      * @param $file_path
      * @return Response
-     * @throws FileNotFoundException
      */
     public function index($file_path)
     {

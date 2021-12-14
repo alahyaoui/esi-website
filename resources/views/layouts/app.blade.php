@@ -13,16 +13,7 @@
         <title>Tableau de bord</title>
     </head>
     <body>
-
-        @if(Auth::check())
-            @if(Auth::User()->is_secretary)
-                @include('incs.header_secretary')
-            @else            
-                @include('incs.header')
-            @endif
-        @else
-            @include('incs.header_home')
-        @endif
+        @include('incs.header')
 
         @yield('content')
 

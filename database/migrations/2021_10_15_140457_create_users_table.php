@@ -20,7 +20,9 @@ class CreateUsersTable extends Migration
 
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_secretary')->default(false);
-            $table->boolean('is_student')->default(false);
+            $table->boolean('is_student')->default(false); // si inscription validé
+            $table->boolean('demande_inscription')->default(false);
+            $table->boolean('reinscription')->default(false);
 
             $table->rememberToken();
             $table->timestamps();

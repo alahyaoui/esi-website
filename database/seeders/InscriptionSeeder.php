@@ -15,11 +15,8 @@ class InscriptionSeeder extends Seeder
     public function run()
     {
         DB::table('inscriptions')->insert([
-            'student_matricule' => 54247,
-        ]);
-
-        DB::table('inscriptions')->insert([
-            'student_matricule' => 54985,
+            'user_id' => 1,
+            'state' => 'V'
         ]);
     }
 }

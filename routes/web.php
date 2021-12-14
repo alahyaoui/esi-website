@@ -7,6 +7,7 @@ use App\Http\Controllers\StudentRegisterController;
 use App\Http\Controllers\StudentListController;
 use App\Http\Controllers\CavpController;
 use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\AvancementDossierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,23 +54,26 @@ Route::post('/cavp/demande/refuser', [CavpController::class, 'refuserDemande']);
 /** **/
 Auth::routes();
 
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::get('/studentregister', 'App\Http\Controllers\StudentRegisterController@index')
-    ->name('studentregister');
+Route::get('/studentregister', 'App\Http\Controllers\StudentRegisterController@index')->name('studentregister');
 
-Route::post('/studentregister', 'App\Http\Controllers\StudentRegisterController@store')
-    ->name('storeStudent');
+Route::post('/studentregister', 'App\Http\Controllers\StudentRegisterController@store')->name('storeStudent');
 
 Route::get('/studentlist', 'App\Http\Controllers\StudentListController@index');
 
+
+Route::get('validate/{user_id}', 'App\Http\Controllers\InscriptionController@validateInscription');
+
+Route::get('refuse/{user_id}/{message_refus}', 'App\Http\Controllers\InscriptionController@refuseInscription');
+
+Route::get('/avancementdossier', 'App\Http\Controllers\AvancementDossierController@index')->name('avancementdossier');
+
 Route::get('/{path}', 'App\Http\Controllers\DownloadFileController@index')->name('download_file');
 
-Route::get('validate/{studentMatricule}', 'App\Http\Controllers\InscriptionController@validateInscription') ;
-
-Route::get('refuse/{studentMatricule}/{message_refus}', 'App\Http\Controllers\InscriptionController@refuseInscription') ;
 
 // TODO: Add file upload routes (and Controller)
 // https://www.positronx.io/laravel-file-upload-with-validation/
