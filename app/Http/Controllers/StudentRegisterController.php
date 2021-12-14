@@ -31,20 +31,18 @@ class StudentRegisterController extends Controller {
     public function store(Request $request) {
         
         $student = new Student();
-        $count_seededStudent = Student::oldest()->get()->count();
         
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->bloc = $request->bloc;
         $student->section = $request->section;
         $student->user_id = Auth::user()->id;
-        $student->matricule = ($count_seededStudent == 0) ? 1 : Student::oldest()->get()[$count_seededStudent-1]->matricule + 1;
         
         $student->save();
 
         DB::table('users')
             ->where('id', Auth::user()->id)
-            ->update(['is_student' => true]);
+            ->update(['demande_inscription' => true]);
 
         $request->validate([
             'cess' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
@@ -78,7 +76,7 @@ class StudentRegisterController extends Controller {
         }
 
         $new_inscription = new Inscription();
-        $new_inscription->student_matricule = $student->matricule;
+        $new_inscription->user_id = Auth::user()->id;
         $new_inscription->save();
         
         return back()->with('success', 'Inscription réussie');

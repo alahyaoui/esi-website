@@ -16,8 +16,8 @@ class CreateInscriptionsTable extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_matricule');
-            $table->foreign('student_matricule')->on('student')->references('matricule');
+            $table->integer('user_id');
+            $table->foreign('user_id')->on('student')->references('user_id');
             $table->longText('message_refus')->nullable();
             $table->char('state', 1)->default('E');
             $table->timestamps();
