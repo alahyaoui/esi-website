@@ -11,6 +11,6 @@ class DownloadFileController extends Controller
     public function index($file_path)
     {
         $file = Storage::disk('public')->get($file_path);
-        return (new    Response($file, 200));
+        return (new Response($file, 200));
     }
 }

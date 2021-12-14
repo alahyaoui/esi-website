@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Programme;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Business\PAE;
 
@@ -19,7 +17,6 @@ class ProgrammeController extends Controller
     }
 
 
-    //When student is created
     /**
      * Construit un bulletin initiale pour les primo-inscris
      */
