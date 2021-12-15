@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('student');
+            $table->unsignedBigInteger('student');
             $table->foreign('student')->on('student')->references('id')->onDelete('cascade');
 
             // $table->string('type'); // TODO: Type de fichier??

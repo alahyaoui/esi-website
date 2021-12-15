@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use App\Models\Programme;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Business\PAE;
 
@@ -16,6 +18,8 @@ class ProgrammeController extends Controller
         $this->user_id = 0;
     }
 
+
+    //When student is created
 
     /**
      * Construit un bulletin initiale pour les primo-inscris
@@ -48,16 +52,21 @@ class ProgrammeController extends Controller
                 ]);
         }
     }
+
     /**
      * Retourne le numéro du bloc du cours
      */
     private function getBloc($course_title)
     {
-        return DB::table('course')->select('bloc')->where('title', '=', $course_title)->get()[0];
+        return DB::table('course')
+            ->select('bloc')
+            ->where('title', '=', $course_title)
+            ->get()[0];
     }
 
 
     //Each year
+
     /**
      * Construit le bulletin d'un étudiant
      */
@@ -67,7 +76,7 @@ class ProgrammeController extends Controller
         $courses_graph = $pae->get_graph();
 
 
-        $courses =  DB::table('programme')
+        $courses = DB::table('programme')
             ->select('course', 'is_accessible', 'is_validated')
             ->where('student', '=', $matricule)
             ->get();
@@ -82,21 +91,20 @@ class ProgrammeController extends Controller
                     ->update(['is_accessible' => false]);
             } else {
                 //Current course
-                $is_accessible = true;
+                $is_accessible = false;
 
                 //Prerequis
                 $prerequis = $courses_graph[$pae->getCourseByTitle($title)]->getPrerequis();
                 $is_accessible = $this->isAllPrerequisValidated($prerequis);
 
-
                 //Corequis
-                if ($is_accessible) {
+                if ($is_accessible == true) {
                     $corequis = $courses_graph[$pae->getCourseByTitle($title)]->getCorequis();
                     $is_accessible = $this->isAllCorequisAccessible($corequis);
                 }
 
                 //Update Course
-                if ($is_accessible) {
+                if ($is_accessible == true) {
                     DB::table('programme')
                         ->where('student', '=', $matricule)
                         ->where('course', '=', $title)
@@ -105,6 +113,7 @@ class ProgrammeController extends Controller
             }
         }
     }
+
     /**
      * Vérifie la validité d'un cours
      */
@@ -120,8 +129,9 @@ class ProgrammeController extends Controller
             ->select('is_validated')
             ->where('student', '=', $matricule)
             ->where('course', '=', $course_title)
-            ->get()[0];
+            ->get()[0]->is_validated;
     }
+
     /**
      * Vérifie l'accessibilité d'un cours
      */
@@ -135,35 +145,35 @@ class ProgrammeController extends Controller
 
         return DB::table('programme')
             ->select('is_accessible')
-            ->where('matricule', '=', $matricule)
-            ->where('title', '=', $course_title)
-            ->get()[0];
+            ->where('student', '=', $matricule)
+            ->where('course', '=', $course_title)
+            ->get()[0]->is_accessible;
     }
+
     /**
      * Vérifie si tout les prérequis sont validés
      */
     private function isAllPrerequisValidated($prerequis)
     {
-        $are_all_validated = true;
         foreach ($prerequis as $prerequi) {
             if (!$this->isValidated($prerequi->getTitle())) {
-                $are_all_validated = false;
+                return false;
             }
         }
-        return $are_all_validated;
+        return true;
     }
+
     /**
      * Vérifie si tout les corequis sont accessible
      */
     private function isAllCorequisAccessible($corequis)
     {
-        $are_all_accessible = true;
         foreach ($corequis as $corequi) {
             if (!$this->isAccessible($corequi->getTitle())) {
-                $are_all_accessible = false;
+                return false;
             }
         }
-        return $are_all_accessible;
+        return true;
     }
 
     /**

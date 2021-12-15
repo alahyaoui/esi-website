@@ -37,6 +37,7 @@ class PAE
         }
         return -1;
     }
+
     private function init_graph()
     {
         $titles = DB::table('course')
@@ -47,6 +48,7 @@ class PAE
             $this->add_course($course);
         }
     }
+
     private function make_graph()
     {
         $this->init_prerequis();
