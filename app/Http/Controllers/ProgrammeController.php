@@ -29,7 +29,7 @@ class ProgrammeController extends Controller
         $section = DB::table('student')
             ->select('section')
             ->where('matricule', '=', $student_matricule)
-            ->get()[0];
+            ->get()[0]->section;
 
 
         $courses = DB::table('course_section')
@@ -39,14 +39,14 @@ class ProgrammeController extends Controller
 
         for ($i = 0; $i < sizeof($courses); $i++) {
             $is_accessible = false;
-            if ($this->getBloc($courses[$i]) == 1) {
+            if ($this->getBloc($courses[$i]->course) == 1) {
                 $is_accessible = true;
             }
 
             DB::table('programme')
                 ->insert([
                     'student' => $student_matricule,
-                    'course' => $courses,
+                    'course' => $courses[$i]->course,
                     'cote' => 0,
                     'is_accessible' => $is_accessible,
                 ]);
@@ -61,7 +61,7 @@ class ProgrammeController extends Controller
         return DB::table('course')
             ->select('bloc')
             ->where('title', '=', $course_title)
-            ->get()[0];
+            ->get()[0]->bloc;
     }
 
 
@@ -201,6 +201,30 @@ class ProgrammeController extends Controller
                 'course.hours as courseHours'
             )
             ->where('programme.student', '=', $matricule)
+            ->get();
+        return response()->json($programme);
+    }
+
+    public function getStudentPAE($user_id)
+    {
+        $this->user_id = $user_id;
+        $matricule = DB::table('student')
+            ->select('matricule')
+            ->where('user_id', '=', $user_id)
+            ->get()[0]
+            ->matricule;
+
+        $programme = DB::table('programme')
+            ->join('course', 'programme.course', '=', 'course.title')
+            ->select(
+                'programme.*',
+                'course.description as courseDesc',
+                'course.credits as courseCredits',
+                'course.quadri as courseQuadri',
+                'course.hours as courseHours'
+            )
+            ->where('programme.student', '=', $matricule)
+            ->where('programme.is_accessible', '=', true)
             ->get();
         return response()->json($programme);
     }
