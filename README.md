@@ -21,3 +21,34 @@ N'hésitez pas à créer un nouveau compte pour avoir une expérience de nouvel 
 
 Vous pouvez maintenant travailler sur gitlab normalement (commit, push, etc..) et une fois vos changements terminés
 lancez `git push heroku master` pour déployer sur la branche master de heroku.
+
+## BUGS PRESENTS DANS L'APPLICATION
+
+
+1. La date de fin des inscriptions
+est définie dans le code et ne peut pas être consultée 
+ou modifiée par l'administrateur.
+La création d'un rôle directeur (directeur@gmail.com) sera utile.
+
+Tous les utilisateurs peuvent consulter la date.
+Seul le directeur peut modifier la date
+
+//Pas réalisé car avancement du dossier a nécessité plus de travail que prévu  :
+Changement des vues, changement de la logique métier + base de données.
+
+2. Incident 4 - CESS - 404
+En tant que secrétaire, si je consulte l'étudiant de matricule 1,
+si je clique sur le bouton CESS, une erreur 404 est affichée.
+// erreur a comprendre
+
+3. Incident 1 - Formulaire PAE
+
+Malgré les story ci-dessous terminées, un incident subsiste :
+
+Étudiant consulter mon PAE modifer/vérifier
+Étudiant connaître l'avancement de mon dossier connaître
+
+En tant qu'étudiant, le bouton Post du formulaire d'encodage des programmes 
+ne provoque aucune action visible (en tant qu'étudiant ou secrétaire).
+
+//Pas réellement un bug, la fonctionnalité n'a juste pas été implémentée
