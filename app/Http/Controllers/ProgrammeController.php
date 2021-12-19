@@ -84,7 +84,21 @@ class ProgrammeController extends Controller
                 'is_accessible' => (boolean)$data[4],
             ]);
         }
+        ProgrammeController::updateStudentsBulletin();
     }
+
+    private static function updateStudentsBulletin()
+    {
+        $students = DB::table('student')
+            ->select('matricule')
+            ->where('is_graduated', '=', false)
+            ->get();
+
+        foreach ($students as $student) {
+            ProgrammeController::updateStudentBulletin($student->matricule);
+        }
+    }
+
 
     //Each year
 
