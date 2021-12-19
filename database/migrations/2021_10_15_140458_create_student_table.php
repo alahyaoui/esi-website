@@ -6,19 +6,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 
-class CreateStudentTable extends Migration {
+class CreateStudentTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         Schema::create('student', function (Blueprint $table) {
             // $table->integer('matricule')->primary();
             $table->id();
-            $table->integer('matricule')->unique()->nullable();
+            $table->unsignedBigInteger('matricule')->unique()->nullable();
             $table->string('first_name');
             $table->string('last_name');
+
+            $table->boolean('is_graduated')->default(false);
 
             $table->integer('bloc');
             $table->foreign('bloc')->on('bloc')->references('bloc');
@@ -42,7 +46,8 @@ class CreateStudentTable extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('student');
     }
 }
