@@ -64,6 +64,27 @@ class ProgrammeController extends Controller
             ->get()[0]->bloc;
     }
 
+    public static function importStudentsBulletin($file_name)
+    {
+        $csv_path = resource_path('data\\' . $file_name . '.csv');
+        $csv = array_map('str_getcsv', file($csv_path));
+
+        foreach ($csv as $data) {
+            $student = DB::table('student')
+                ->select('*')
+                ->where('matricule', '=', $data[0])
+                ->get()[0]
+                ->matricule;
+
+            DB::table('programme')->insert([
+                'student' => $student,
+                'course' => $data[1],
+                'cote' => $data[2],
+                'is_validated' => (boolean)$data[3],
+                'is_accessible' => (boolean)$data[4],
+            ]);
+        }
+    }
 
     //Each year
 
