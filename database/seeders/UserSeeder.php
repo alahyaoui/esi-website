@@ -23,6 +23,18 @@ class UserSeeder extends Seeder
             'demande_inscription' => true
         ]);
         DB::table('users')->insert([
+            'email' => "54895@gmail.com",
+            'password' => Hash::make("azerty123"),
+            'is_student' => true,
+            'demande_inscription' => true
+        ]);
+        DB::table('users')->insert([
+            'email' => "12345@gmail.com",
+            'password' => Hash::make("newstudent"),
+            'is_student' => true,
+            'demande_inscription' => true
+        ]);
+        DB::table('users')->insert([
             'email' => "admin@gmail.com",
             'password' => Hash::make("admin"),
             'is_admin' => true,
