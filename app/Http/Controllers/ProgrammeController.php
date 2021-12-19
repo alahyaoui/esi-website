@@ -179,7 +179,7 @@ class ProgrammeController extends Controller
     private static function isAllPrerequisValidated($student_matricule, $prerequis)
     {
         foreach ($prerequis as $prerequi) {
-            if (ProgrammeController::isValidated($student_matricule, $prerequi->getTitle())) {
+            if (ProgrammeController::isValidated($student_matricule, $prerequi->getTitle()) == false) {
                 return false;
             }
         }
@@ -192,7 +192,7 @@ class ProgrammeController extends Controller
     private static function isAllCorequisAccessible($student_matricule, $corequis)
     {
         foreach ($corequis as $corequi) {
-            if (ProgrammeController::isAccessible($student_matricule, $corequi->getTitle())) {
+            if (ProgrammeController::isAccessible($student_matricule, $corequi->getTitle()) == false) {
                 return false;
             }
         }
