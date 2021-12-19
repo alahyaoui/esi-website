@@ -52,3 +52,21 @@ En tant qu'étudiant, le bouton Post du formulaire d'encodage des programmes
 ne provoque aucune action visible (en tant qu'étudiant ou secrétaire).
 
 //Pas réellement un bug, la fonctionnalité n'a juste pas été implémentée
+
+## USER STORIES REALISEES
+
+créer un compte dans le but de  faire ma demande d'inscription
+CONSULTER PAE
+connaitre l'avancement de mon dossier
+gérer les pré-requis
+introduire une demande à la CAVP
+consulter la liste des étudiants(des futurs étudiants inscrits)
+mettre à jour le dossier d'un étudiant
+définir la période d'inscription
+traiter les demandes de la CAVP
+
+## USER STORIES NON REALISEES ESTIMEES
+
+PAYER LE MINERVAL SPIKES
+modifier mon PAE (nouvelle proposition) 13
+gérer les inscriptions des NON UE 5 
