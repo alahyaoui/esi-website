@@ -15,7 +15,7 @@ class CreateProgrammeTable extends Migration
     public function up()
     {
         Schema::create('programme', function (Blueprint $table) {
-            $table->integer('student');
+            $table->unsignedBigInteger('student');
             $table->foreign('student')->on('student')->references('matricule');
 
             $table->string('course');
@@ -23,8 +23,8 @@ class CreateProgrammeTable extends Migration
 
             $table->integer('cote');
             $table->boolean('is_validated')->default(false);
-            $table->boolean('is_accessible')-> default(false);
-            
+            $table->boolean('is_accessible')->default(false);
+
             $table->primary(array('student', 'course'));
         });
         DB::statement('ALTER TABLE programme ADD CONSTRAINT chk_cote_number CHECK (cote >= 0);');
