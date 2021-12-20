@@ -16,7 +16,15 @@ class InscriptionSeeder extends Seeder
     {
         DB::table('inscriptions')->insert([
             'user_id' => 1,
-            'state' => 'V'
+            'state' => 'V',
+        ]);
+        DB::table('inscriptions')->insert([
+            'user_id' => 2,
+            'state' => 'V',
+        ]);
+        DB::table('inscriptions')->insert([
+            'user_id' => 3,
+            'state' => 'V',
         ]);
     }
 }
