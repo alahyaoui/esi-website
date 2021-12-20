@@ -18,7 +18,8 @@ class ExampleTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'email' => '54247@gmail.com',
-            'email' => '54985@gmail.com',
+            'email' => '54895@gmail.com',
+            'email' => '12345@gmail.com',
             'email' => 'secretaire@gmail.com',
             'email' => 'admin@gmail.com'
         ]);
@@ -34,9 +35,11 @@ class ExampleTest extends TestCase
 
         $this->assertDatabaseHas('student', [
             'matricule' => 54247,
-            'matricule' => 54985,
+            'matricule' => 54895,
+            'matricule' => 12345,
             'user_id' => 1,
             'user_id' => 2,
+            'user_id' => 3,
         ]);
         //$this->assertDatabaseCount('course');
     }

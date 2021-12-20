@@ -17,13 +17,13 @@ class PaeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                ->type('email', "54247@gmail.com")
-                ->type('password', "dewdew")
+                ->type('email', "12345@gmail.com")
+                ->type('password', "newstudent")
                 ->press('Login')
                 ->visit('/pae')
                 ->assertSee('Votre PAE');
             $browser->pause(1000)
-                ->assertSee('CPRG4');
+                ->assertSee('WEBG2');
         });
     }
 }

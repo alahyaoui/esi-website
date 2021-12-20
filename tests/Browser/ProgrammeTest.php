@@ -17,8 +17,8 @@ class ProgrammeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                ->type('email', "54247@gmail.com")
-                ->type('password', "dewdew")
+                ->type('email', "12345@gmail.com")
+                ->type('password', "newstudent")
                 ->press('Login')
 
                 ->visit('/programme');
