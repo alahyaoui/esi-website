@@ -16,7 +16,7 @@ class CreateDemandeTable extends Migration
     {
         Schema::create('demande', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_matricule');
+            $table->unsignedBigInteger('student_matricule');
             $table->foreign('student_matricule')->on('student')->references('matricule');
             $table->longText('message');
             $table->char('state', 1)->default('E');

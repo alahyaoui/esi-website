@@ -17,7 +17,7 @@ class CourseSeeder extends Seeder
     public function run()
     {
         // Course::factory()->count(50)->create();
-        Course::truncate();
+        //Course::truncate();
         CourseSeeder::seedDB();
         CourseSeeder::seedSection('G');
         CourseSeeder::seedSection('I');

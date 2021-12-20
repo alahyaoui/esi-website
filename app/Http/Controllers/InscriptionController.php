@@ -28,6 +28,8 @@ class InscriptionController extends Controller {
         DB::table('users')
             ->where('id', $user_id)
             ->update(['is_student' => true, 'reinscription' => false]);
+
+        ProgrammeController::initStudentBulletin($matricule);
     }
 
     public function refuseInscription($user_id, $message_refus) {
