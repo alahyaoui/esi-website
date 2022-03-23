@@ -70,3 +70,12 @@ traiter les demandes de la CAVP
 PAYER LE MINERVAL SPIKES
 modifier mon PAE (nouvelle proposition) 13
 gérer les inscriptions des NON UE 5 
+
+# Auteurs
+- ** Lahyaoui Ayoub **
+- ** Zakaria Bendaimi **
+- ** Amine-Ayoub Bigham **
+- ** Ismael Benkadour **
+- ** Said El Mouden **
+- ** Nicolas Rossito **
+- ** Kawtar Massani **
